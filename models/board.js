@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
   class Board extends Model {
     static associate(models) {
       // define association here
+      this.hasMany(models.UserBoard, {
+        targetKey: 'boardId',
+        foreignKey: 'boardId',
+      });
     }
   }
   Board.init(
