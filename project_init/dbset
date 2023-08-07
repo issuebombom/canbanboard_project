@@ -8,6 +8,8 @@ npx sequelize model:generate --name User --attributes email:string,password:stri
 npx sequelize model:generate --name Board --attributes name:string,admins:string,color:string,description:string,totalColumnsNum:integer
 # 컬럼
 npx sequelize model:generate --name Column --attributes boardId:integer,order:integer,name:string
+# 카드
+npx sequelize model:generate --name Card --attributes columnId:integer,name:string,order:integer,description:string,expiredDate:date,color:string
 # 코멘트
 npx sequelize model:generate --name Comment --attributes cardId:integer,userId:integer,content:string
 # 유저카드
@@ -17,3 +19,4 @@ npx sequelize model:generate --name UserBoard --attributes userId:integer,boardI
 
 # 마이그레이트
 npx sequelize db:migrate
+

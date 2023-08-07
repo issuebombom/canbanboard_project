@@ -1,27 +1,39 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
+  class Card extends Model {
     static associate(models) {
       // define association here
     }
   }
-  Comment.init(
+  Card.init(
     {
-      commentId: {
+      cardId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      cardId: {
+      columnId: {
+        allowNull: false,
         type: DataTypes.INTEGER,
       },
-      userId: {
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      order: {
+        allowNull: false,
         type: DataTypes.INTEGER,
       },
-      content: {
-        type: DataTypes.TEXT,
+      description: {
+        type: DataTypes.STRING,
+      },
+      expiredDate: {
+        type: DataTypes.DATE,
+      },
+      color: {
+        type: DataTypes.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -34,8 +46,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Comment',
+      modelName: "Card",
     }
   );
-  return Comment;
+  return Card;
 };
