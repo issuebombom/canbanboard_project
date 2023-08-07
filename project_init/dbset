@@ -1,0 +1,19 @@
+# 가장 초기에만 init을 적용하고 이후에는 주석처리할 것
+npx sequelize init
+# sequelize init 또는 db:drop 하고 난 뒤에 해당 source를 실행하면 됩니다.
+npx sequelize db:create --env development
+# 유저
+npx sequelize model:generate --name User --attributes email:string,password:string,nickname:string
+# 보드
+npx sequelize model:generate --name Board --attributes name:string,admins:string,color:string,description:string,totalColumnsNum:integer
+# 컬럼
+npx sequelize model:generate --name Column --attributes boardId:integer,order:integer,name:string
+# 코멘트
+npx sequelize model:generate --name Comment --attributes cardId:integer,userId:integer,content:string
+# 유저카드
+npx sequelize model:generate --name UserCard --attributes userId:integer,cardId:integer
+# 유저보드
+npx sequelize model:generate --name UserBoard --attributes userId:integer,boardId:integer
+
+# 마이그레이트
+npx sequelize db:migrate
