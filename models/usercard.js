@@ -3,7 +3,16 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class UserCard extends Model {
     static associate(models) {
-      // define association here
+      this.belongsTo(models.User, {
+        targetKey: 'userId',
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      });
+      this.belongsTo(models.Card, {
+        targetKey: 'cardId',
+        foreignKey: 'cardId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   UserCard.init(
