@@ -25,17 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       admins: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
       color: {
         type: DataTypes.STRING,
       },
       description: {
         type: DataTypes.STRING,
-      },
-      totalColumnsNum: {
-        type: DataTypes.INTEGER,
-        defaultValue: 3,
       },
       createdAt: {
         allowNull: false,
