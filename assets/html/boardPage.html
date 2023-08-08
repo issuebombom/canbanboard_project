@@ -173,7 +173,7 @@
                     <input type="text" class="form-control" id="columnName" value="columnName1">
                     <button type="button" class="btn btn-secondary">수정</button>
                 </div>
-                <div class="cardBox">
+                <div draggable="true" class="cardBox">
                     <div draggable="true" class="card">
                         <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
                     </div>
@@ -185,7 +185,7 @@
                     <input type="text" class="form-control" id="columnName" value="columnName2">
                     <button type="button" class="btn btn-secondary">수정</button>
                 </div>
-                <div class="cardBox">
+                <div draggable="true" class="cardBox">
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
             </div>
@@ -194,7 +194,7 @@
                     <input type="text" class="form-control" id="columnName" value="columnName3">
                     <button type="button" class="btn btn-secondary">수정</button>
                 </div>
-                <div class="cardBox">
+                <div draggable="true" class="cardBox">
                     <div draggable="true" class="card">
                         <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
                     </div>
@@ -264,7 +264,7 @@
             }
         }
 
-        //드래그
+        //컬럼 드래그
         const columnDraggables = document.querySelectorAll('.column');
         const boardContainer = document.querySelectorAll(".columnBox");
 
@@ -292,6 +292,51 @@
         function getDragAfterElement(container, x) {
             const draggableElements = [
                 ...container.querySelectorAll(".column:not(.dragging)"),
+            ];
+
+            return draggableElements.reduce(
+                (closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = x - box.left - box.width /2;
+
+                    if(offset < 0 && offset > closest.offset) {
+                        return {offset:offset, element:child}
+                    }else {
+                        return closest;
+                    }
+                },
+                {offset: Number.NEGATIVE_INFINITY},
+            ).element;
+        }
+
+        //카드 드래그
+        const cardDraggables = document.querySelectorAll('.card');
+        const cardContainer = document.querySelectorAll(".cardBox");
+
+        cardDraggables.forEach(draggable => {
+            draggable.addEventListener("dragstart", () => {
+                draggable.classList.add("dragging2");
+            });
+
+            draggable.addEventListener("dragend", () => {
+                draggable.classList.remove("dragging2");
+            });
+        });
+        cardContainer.forEach(container => {
+            container.addEventListener("dragover", e => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientX);
+                const draggable = document.querySelector(".dragging2");
+                if (afterElement === undefined) {
+                container.appendChild(draggable);
+                } else {
+                container.insertBefore(draggable, afterElement);
+                }
+            });
+        });
+        function getDragAfterElement(container, x) {
+            const draggableElements = [
+                ...container.querySelectorAll(".column:not(.dragging2)"),
             ];
 
             return draggableElements.reduce(
