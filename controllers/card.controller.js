@@ -23,7 +23,7 @@ class CardController {
       res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
-      return res.status(error.status).send({ message: error.message });
+      return res.status(error.status || 500).send({ message: error.message });
     }
   };
 
@@ -32,22 +32,24 @@ class CardController {
     const { columnId } = req.params;
 
     try {
-      const { status, cards } = await this.cardService.getCard(columnId);
+      const { status, message, cards } = await this.cardService.getCard(columnId);
 
-      res.status(status).send({ cards });
+      res.status(status).send({ message, data: cards });
     } catch (error) {
       console.error(error.stack);
-      return res.status(error.status).send({ message: error.message });
+      return res.status(error.status || 500).send({ message: error.message });
     }
   };
 
   // 카드 수정
   putCard = async (req, res) => {
     const { columnId, cardId } = req.params;
+    const userId = req.user.userId
     const { name, order, description, expiredDate, color } = req.body;
 
     try {
       const { status, message } = await this.cardService.putCard(
+        userId,
         columnId,
         cardId,
         name,
@@ -60,21 +62,21 @@ class CardController {
       res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
-      return res.status(error.status).send({ message: error.message });
+      return res.status(error.status || 500).send({ message: error.message });
     }
   };
 
   // 카드 삭제
   deleteCard = async (req, res) => {
     const { columnId, cardId } = req.params;
-
+    const userId = req.user.userId
     try {
-      const { status, message } = await this.cardService.deleteCard(columnId, cardId);
+      const { status, message } = await this.cardService.deleteCard(userId, columnId, cardId);
 
       res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
-      return res.status(error.status).send({ message: error.message });
+      return res.status(error.status || 500).send({ message: error.message });
     }
   };
 }

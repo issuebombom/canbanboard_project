@@ -33,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.STRING,
       },
-      totalColumnsNum: {
-        type: DataTypes.INTEGER,
-        defaultValue: 3,
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

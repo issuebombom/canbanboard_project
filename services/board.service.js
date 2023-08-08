@@ -2,7 +2,7 @@ const { User, Board, UserBoard } = require('../models');
 const CustomError = require('../error');
 
 class BoardService {
-  createBoard = async ({ name, description, admins, color, totalColumnsNum }) => {
+  createBoard = async (name, description, admins, color) => {
     const createdBoard = await Board.create({
       name,
       description,

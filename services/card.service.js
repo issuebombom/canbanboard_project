@@ -1,8 +1,11 @@
-const { Card, UserCard, Column } = require('../models');
+const { User, Card, UserCard, Column } = require('../models');
 const CustomError = require('../error');
+const UserCardService = require('../services/usercard.service');
 const dayjs = require('dayjs');
 
 class CardService {
+  userCardService = new UserCardService();
+
   // 카드 생성 (UserCard 함께 생성)
   postCard = async (columnId, userId, name, order, description, expiredDate, color) => {
     const findOneCard = await Card.findOne({ where: { order } });
@@ -17,22 +20,16 @@ class CardService {
     // } else if (!findOneColumn) {
     //   throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     // }
-
-    expiredDate = dayjs().add(1, 'year').endOf('day').$d;
-    console.log(expiredDate);
-
     const card = await Card.create({
       columnId,
       name,
       order,
       description,
-      expiredDate,
+      expiredDate: new Date(expiredDate), // '2023-03-08'
       color,
     });
 
-    console.log(userId, card.cardId);
-
-    await UserCard.create({ userId: 6, cardId: 1 });
+    await UserCard.create({ userId, cardId: card.cardId });
 
     return { status: 201, message: '카드를 생성하였습니다.' };
   };
@@ -45,19 +42,21 @@ class CardService {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     }
 
-    return await Card.findAll({ where: { columnId } });
+    const cards = await Card.findAll({ where: { columnId } });
+    return { status: 201, message: '카드 조회에 성공하였습니다.', cards };
   };
 
   // 카드 수정
-  putCard = async (columnId, cardId, name, order, description, expiredDate, color) => {
+  putCard = async (userId, columnId, cardId, name, order, description, expiredDate, color) => {
+    const cards = await this.userCardService.getJoinCard(userId);
     const column = await Column.findByPk(columnId);
-    const card = await Card.findByPk(cardId);
+    let card = await Card.findByPk(cardId);
 
     if (!column) {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     } else if (!card) {
       throw new CustomError(404, '카드가 존재하지 않습니다.');
-    } else if (card.cardId !== cardId) {
+    } else if (card.cardId !== cards[0].cardId) {
       throw new CustomError(403, '카드 수정 권한이 존재하지 않습니다.');
     }
 
@@ -65,24 +64,25 @@ class CardService {
     if (name) card.name = name;
     if (order) card.order = order;
     if (description) card.description = description;
-    if (expiredDate) card.expiredDate = expiredDate;
+    if (expiredDate) card.expiredDate = new Date(expiredDate);
     if (color) card.color = color;
 
-    const cards = await card.save();
+    card = await card.save();
 
-    return { status: 201, message: '카드를 수정하였습니다.', cards };
+    return { status: 201, message: '카드를 수정하였습니다.', card };
   };
 
   // 카드 삭제
-  deleteCard = async (columnId, cardId) => {
+  deleteCard = async (userId, columnId, cardId) => {
+    const cards = await this.userCardService.getJoinCard(userId);
     const column = await Column.findByPk(columnId);
-    const card = await Card.findByPk(cardId);
+    let card = await Card.findByPk(cardId);
 
     if (!column) {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     } else if (!card) {
       throw new CustomError(404, '카드가 존재하지 않습니다.');
-    } else if (card.cardId !== cardId) {
+    } else if (card.cardId !== cards[0].cardId) {
       throw new CustomError(403, '카드 수정 권한이 존재하지 않습니다.');
     }
 

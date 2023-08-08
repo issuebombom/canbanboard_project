@@ -2,8 +2,9 @@ const { Board, UserBoard } = require('../models');
 const CustomError = require('../error');
 
 class UserBoardService {
-  createUserBoard = async ({ userBoardId, userId, boardId }) => {
-    const createUserBoard = await UserBoard.create({ userBoardId, userId, boardId });
+
+  createUserBoard = async (userId, boardId) => {
+    const createUserBoard = await UserBoard.create({ userId, boardId });
     return createUserBoard;
   };
 

@@ -10,16 +10,8 @@ class BoardController {
     const user = req.user;
 
     try {
-      const board = await this.boardService.createBoard({
-        name,
-        description,
-        admins: user.userId,
-        color,
-      });
-      const userBoard = await this.userBoardService.createUserBoard({
-        userId: user.userId,
-        boardId: board.boardId,
-      });
+      const board = await this.boardService.createBoard(name, description, user.userId, color);
+      await this.userBoardService.createUserBoard(user.userId, board.boardId);
       return res.send({ message: '보드 생성 완료' });
     } catch (err) {
       console.error(err.stack);
