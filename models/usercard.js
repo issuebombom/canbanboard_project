@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       userCardId: {
         allowNull: false,
+        primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
