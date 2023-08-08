@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       admins: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
       color: {
         type: DataTypes.STRING,
