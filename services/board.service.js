@@ -42,7 +42,6 @@ class BoardService {
     if (user.userId !== board.admins) {
       throw new CustomError(403, '보드 삭제 권한이 존재하지 않습니다.');
     }
-    // const deystroyedUserBoard = await UserBoard.destroy({ where: { boardId } });
     const deystroyedBoard = await Board.destroy({ where: { boardId } });
     return deystroyedBoard;
   };
