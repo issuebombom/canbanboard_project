@@ -24,6 +24,11 @@
 </head>
 <body>
     <header>
+      <div class="mytitle">
+        <div>
+          <h3 class="titleName">6사시미</h3>
+        </div>
+      </div>
         <div>
             <label><h3>boardName</h3></label>
             <button type="button" class="btn btn-info infoBtn" onclick="userInfo()">Info</button>
@@ -97,7 +102,10 @@
                     </div>
                     </div>
                     <div class="mb-3 row backgroundColor">
-                        <!-- 컬러는 어찌 넣을까아.. -->
+                        <label for="backgroundColor" class="col-sm-2 col-form-label">색상</label>
+                        <!-- 색상 리스트자리 -->
+                        <input type="color" style="width: 200px; margin: 10px auto auto auto;" class="form-control" id="backgroundColor">
+                        <button type="button" class="btn btn-info" style="width: 100px; margin: 10px auto auto auto;">저장</button>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -153,11 +161,13 @@
                   <div class="mb-3 row">
                     <label for="cardColor" class="col-sm-2 col-form-label">색상</label>
                     <!-- 색상 리스트자리 -->
+                    <input type="color" class="form-control" id="cardColor">
                   </div>
                   <div class="mb-3 row">
                     <label for="cardDate" class="col-sm-2 col-form-label">마감일자</label>
                     <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
                     <!-- https://programmer93.tistory.com/5#google_vignette -->
+                    <input type="date" class="form-control" id="expiredDate">
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -171,11 +181,12 @@
             <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName1">
-                    <button type="button" class="btn btn-secondary">수정</button>
+                    <button type="button" class="btn btn-info">수정</button>
+                    <button type="button" class="btn btn-danger">삭제</button>
                 </div>
                 <div draggable="true" class="cardBox">
                     <div draggable="true" class="card">
-                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
+                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
@@ -183,7 +194,8 @@
             <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName2">
-                    <button type="button" class="btn btn-secondary">수정</button>
+                    <button type="button" class="btn btn-info">수정</button>
+                    <button type="button" class="btn btn-danger">삭제</button>
                 </div>
                 <div draggable="true" class="cardBox">
                 </div>
@@ -192,14 +204,15 @@
             <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName3">
-                    <button type="button" class="btn btn-secondary">수정</button>
+                    <button type="button" class="btn btn-info">수정</button>
+                    <button type="button" class="btn btn-danger">삭제</button>
                 </div>
                 <div draggable="true" class="cardBox">
                     <div draggable="true" class="card">
-                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
+                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName2">
                     </div>
                     <div draggable="true" class="card">
-                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
+                        <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName3">
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
