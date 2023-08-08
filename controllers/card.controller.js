@@ -1,4 +1,4 @@
-const CardService = require("../services/card.service");
+const CardService = require('../services/card.service');
 
 class CardController {
   cardService = new CardService();
@@ -10,7 +10,7 @@ class CardController {
     const { name, order, description, expiredDate, color } = req.body;
 
     try {
-      await this.cardService.postCard(
+      const { status, message } = await this.cardService.postCard(
         columnId,
         userId,
         name,
@@ -20,7 +20,7 @@ class CardController {
         color
       );
 
-      res.status(201).send({ message: "카드를 생성하였습니다." });
+      res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
       return res.status(error.status).send({ message: error.message });
@@ -32,9 +32,9 @@ class CardController {
     const { columnId } = req.params;
 
     try {
-      const cards = await this.cardService.getCard(columnId);
+      const { status, cards } = await this.cardService.getCard(columnId);
 
-      res.status(201).send({ cards });
+      res.status(status).send({ cards });
     } catch (error) {
       console.error(error.stack);
       return res.status(error.status).send({ message: error.message });
@@ -47,7 +47,7 @@ class CardController {
     const { name, description, expiredDate, color } = req.body;
 
     try {
-      await this.cardService.putCard(
+      const { status, message } = await this.cardService.putCard(
         columnId,
         cardId,
         name,
@@ -56,7 +56,7 @@ class CardController {
         color
       );
 
-      res.status(200).send({ message: "카드를 수정하였습니다." });
+      res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
       return res.status(error.status).send({ message: error.message });
@@ -68,9 +68,9 @@ class CardController {
     const { columnId, cardId } = req.params;
 
     try {
-      await this.cardService.deleteCard(columnId, cardId);
+      const { status, message } = await this.cardService.deleteCard(columnId, cardId);
 
-      res.status(200).send({ message: "카드를 삭제하였습니다." });
+      res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
       return res.status(error.status).send({ message: error.message });
@@ -82,9 +82,9 @@ class CardController {
     const { columnId, cardId } = req.params;
 
     try {
-      await this.cardService.moveCard();
+      const { status, message } = await this.cardService.moveCard();
 
-      res.status(200).send({ message: "카드를 이동하였습니다." });
+      res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
       return res.status(error.status).send({ message: error.message });
