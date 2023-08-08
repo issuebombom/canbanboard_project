@@ -11,11 +11,11 @@ const MemoryStore = memorystore(session);
 
 const passportConfig = require('./passport');
 
-const authRouter = require("./routes/auth.router");
-const userRouter = require("./routes/user.router");
-// const boardRouter = require('./routes/board.router');
-// const cardRouter = require('./routes/card.router');
-const columnRouter = require("./routes/column.router");
+const authRouter = require('./routes/auth.router');
+const userRouter = require('./routes/user.router');
+const boardRouter = require('./routes/board.router');
+const cardRouter = require('./routes/card.router');
+const columnRouter = require('./routes/column.router');
 const commentRouter = require('./routes/comment.router');
 
 const app = express();
@@ -45,6 +45,7 @@ app.use(
 app.use(passport.initialize()); // 요청 객체에 passport 설정을 심음
 app.use(passport.session()); // req.session 객체에 passport정보를 추가 저장
 
+app.use(express.static('./assets'));
 //* 라우터
 app.use('/auth', authRouter);
 app.use('/api', [userRouter, columnRouter, cardRouter, boardRouter]);
