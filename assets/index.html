@@ -45,10 +45,39 @@
                 </div>
               </div>
             <div class="buttonGroup" style="padding-left: 35%;">
-                <button type="button" class="btn btn-secondary">로그인</button>
+                <button id="loginBtn" type="button" class="btn btn-secondary">로그인</button>
                 <button type="button" class="btn btn-secondary">회원가입</button>
             </div>
         </div>                   
     </main>
 </body>
+<script>
+  document.getElementById('loginBtn').addEventListener('click', async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('inputPassword').value;
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          console.log(data.message);
+          alert('로그인 되었습니다.');
+          window.location.replace('./html/mainPage.html');
+        } else {
+          console.log(data.message);
+        }
+
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    })
+</script>
 </html>
