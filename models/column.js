@@ -3,7 +3,15 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Column extends Model {
     static associate(models) {
-      // define association here
+      this.hasMany(models.Card, {
+        sourceKey: 'columnId',
+        foreignKey: 'columnId',
+      });
+      this.belongsTo(models.Board, {
+        targetKey: 'boardId',
+        foreignKey: 'boardId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Column.init(
