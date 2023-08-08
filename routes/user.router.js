@@ -10,6 +10,8 @@ const userController = new UserController();
 router.get('/profile', isLoggedIn, userController.getUser);
 // 프로필 수정
 router.put('/profile', isLoggedIn, userController.editUser);
+// 비밀번호 수정
+router.put('/profile/password', isLoggedIn, userController.editUserPassword);
 // 유저 정보 삭제
 router.delete('/profile', isLoggedIn, userController.deleteUser);
 

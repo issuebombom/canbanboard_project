@@ -13,7 +13,7 @@ class UserController {
       return res.send({ data: user });
     } catch (err) {
       console.error(err.stack);
-      return res.status(err.status).send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 
@@ -26,7 +26,20 @@ class UserController {
       return res.send({ message: '회원 정보 수정 완료' });
     } catch (err) {
       console.error(err.stack);
-      return res.status(err.status).send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
+    }
+  };
+
+  editUserPassword = async (req, res) => {
+    try {
+      const userId = req.user.userId;
+      const { password, changePassword, confirmPassword } = req.body;
+
+      await this.userService.editUserPassword(userId, password, changePassword, confirmPassword);
+      return res.send({ message: '비밀번호 변경 완료' });
+    } catch (err) {
+      console.error(err.stack);
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 
@@ -39,7 +52,7 @@ class UserController {
       return res.send({ message: '탈퇴 완료' });
     } catch (err) {
       console.error(err.stack);
-      return res.status(err.status).send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 }
