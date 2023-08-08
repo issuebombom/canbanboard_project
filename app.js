@@ -11,12 +11,12 @@ const MemoryStore = memorystore(session);
 
 const passportConfig = require('./passport');
 
-const authRouter = require('./routes/auth.router');
-const userRouter = require('./routes/user.router');
-const cardRouter = require('./routes/card.router');
-const boardRouter = require('./routes/board.router');
-const columnRouter = require('./routes/column.router');
-// const commentRouter = require('./routes/comment.router');
+const authRouter = require("./routes/auth.router");
+const userRouter = require("./routes/user.router");
+// const boardRouter = require('./routes/board.router');
+// const cardRouter = require('./routes/card.router');
+const columnRouter = require("./routes/column.router");
+const commentRouter = require('./routes/comment.router');
 
 const app = express();
 const port = 3000;
