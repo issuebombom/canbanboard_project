@@ -44,7 +44,7 @@ class CardController {
   // 카드 수정
   putCard = async (req, res) => {
     const { columnId, cardId } = req.params;
-    const userId = req.user.userId
+    const userId = req.user.userId;
     const { name, order, description, expiredDate, color } = req.body;
 
     try {
@@ -69,10 +69,23 @@ class CardController {
   // 카드 삭제
   deleteCard = async (req, res) => {
     const { columnId, cardId } = req.params;
-    const userId = req.user.userId
+    const userId = req.user.userId;
     try {
       const { status, message } = await this.cardService.deleteCard(userId, columnId, cardId);
 
+      res.status(status).send({ message });
+    } catch (error) {
+      console.error(error.stack);
+      return res.status(error.status || 500).send({ message: error.message });
+    }
+  };
+
+  inviteUser = async (req, res) => {
+    const { cardId } = req.params;
+    console.log(cardId);
+    const { email } = req.body;
+    try {
+      const { status, message } = await this.cardService.inviteUser(cardId, email);
       res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
