@@ -207,6 +207,20 @@
                     <!-- https://programmer93.tistory.com/5#google_vignette -->
                     <input type="date" class="form-control-plaintext" readonly id="expiredDate" value="2023-08-11">
                   </div>
+                  <div class="mb-3 row cardMembers">
+                    <label>members</label>
+                    <div class="col-sm-10 cardMember">
+                        <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                        <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                    </div>
+                    <div class="col-sm-10 cardMember">
+                        <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                        <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                    </div>
+                    <div class="col-sm-10 member">
+                      <button type="button" class="btn btn-secondary">member invite</button>
+                  </div>
+                  </div>
                   <div>
                     <button type="button" class="btn btn-secondary" onclick="commentBox()">댓글 작성</button>
                   </div>
@@ -242,6 +256,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeCardGetModal()">Close</button>
                   <button type="button" class="btn btn-primary" onclick="modalCardUpdate()">수정</button>
+                  <button type="button" class="btn btn-danger">삭제</button>
                 </div>
               </div>
             </div>
