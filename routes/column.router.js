@@ -7,12 +7,12 @@ const ColumnController = require('../controllers/column.controller');
 const columnController = new ColumnController();
 
 /** 컬럼 생성 */
-router.post('/board/:boardId/column', isLoggedIn, columnController.createColumn);
+router.post('/boards/:boardId/columns', isLoggedIn, columnController.createColumn);
 /** 컬럼 목록 조회 */
-router.get('/board/:boardId/column', isLoggedIn, columnController.getAllColumn);
+router.get('/boards/:boardId/columns', isLoggedIn, columnController.getAllColumn);
 /** 컬럼 수정 */
-router.put('/board/:boardId/column/:columnId', isLoggedIn, columnController.updateColumn);
+router.put('/boards/:boardId/columns/:columnId', isLoggedIn, columnController.updateColumn);
 /** 컬럼 삭제 */
-router.delete('/board/:boardId/column/:columnId', isLoggedIn, columnController.deleteColumn);
+router.delete('/boards/:boardId/columns/:columnId', isLoggedIn, columnController.deleteColumn);
 
 module.exports = router;

@@ -3,20 +3,40 @@ const UserService = require('../services/user.service');
 class UserController {
   userService = new UserService();
 
-  findUser = async (req, res) => {
-    const userId = req.params.userId; // 프론트에서 보낸 폼데이터를 받는다.
-
+  getUser = async (req, res) => {
     try {
       // 요청을 보낸 유저
-      const me = req.user;
+      const userId = req.user.userId;
 
-      // 본인 프로필을 조회하는 케이스인지 검증
-      const isApproval = this.userService.isPermitted(Number(userId), me.userId);
-      if (isApproval) {
-        // 유저 찾기
-        const user = await this.userService.getUser(Number(userId));
-        return res.send({ data: user });
-      }
+      // 유저 찾기
+      const user = await this.userService.getUser(userId);
+      return res.send({ data: user });
+    } catch (err) {
+      console.error(err.stack);
+      return res.status(err.status).send({ message: `${err.message}` });
+    }
+  };
+
+  editUser = async (req, res) => {
+    try {
+      const userId = req.user.userId;
+      const { nickname } = req.body;
+
+      await this.userService.editUser(userId, nickname);
+      return res.send({ message: '회원 정보 수정 완료' });
+    } catch (err) {
+      console.error(err.stack);
+      return res.status(err.status).send({ message: `${err.message}` });
+    }
+  };
+
+  deleteUser = async (req, res) => {
+    try {
+      const me = req.user;
+      const { password } = req.body;
+
+      await this.userService.deleteUser(me.userId, password, me.password);
+      return res.send({ message: '탈퇴 완료' });
     } catch (err) {
       console.error(err.stack);
       return res.status(err.status).send({ message: `${err.message}` });
