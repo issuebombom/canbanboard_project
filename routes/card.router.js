@@ -1,5 +1,5 @@
 const express = require('express');
-const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
+const { isLoggedIn } = require('../middlewares');
 
 const router = express.Router();
 
@@ -7,18 +7,15 @@ const CardController = require('../controllers/card.controller');
 const cardController = new CardController();
 
 // 카드 생성
-router.post('column/:columnId/card', isLoggedIn, cardController.postCard);
+router.post('/columns/:columnId/cards', isLoggedIn, cardController.postCard);
 
 // 카드 조회
-router.get('column/:columnId/card', isLoggedIn, cardController.getCard);
+router.get('/columns/:columnId/cards', isLoggedIn, cardController.getCard);
 
 // 카드 수정
-router.put('column/:columnId/card/:cardId', isLoggedIn, cardController.putCard);
+router.put('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.putCard);
 
 // 카드 삭제
-router.delete('column/:columnId/card/:cardId', isLoggedIn, cardController.deleteCard);
-
-// 카드 이동
-router.put('column/:columnId/card/:cardId', isLoggedIn, cardController.moveCard);
+router.delete('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.deleteCard);
 
 module.exports = router;

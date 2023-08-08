@@ -6,7 +6,7 @@ class CardController {
   // 카드 생성
   postCard = async (req, res) => {
     const { columnId } = req.params;
-    const { userId } = req.user.userId;
+    const userId = req.user.userId;
     const { name, order, description, expiredDate, color } = req.body;
 
     try {
@@ -44,13 +44,14 @@ class CardController {
   // 카드 수정
   putCard = async (req, res) => {
     const { columnId, cardId } = req.params;
-    const { name, description, expiredDate, color } = req.body;
+    const { name, order, description, expiredDate, color } = req.body;
 
     try {
       const { status, message } = await this.cardService.putCard(
         columnId,
         cardId,
         name,
+        order,
         description,
         expiredDate,
         color
@@ -69,20 +70,6 @@ class CardController {
 
     try {
       const { status, message } = await this.cardService.deleteCard(columnId, cardId);
-
-      res.status(status).send({ message });
-    } catch (error) {
-      console.error(error.stack);
-      return res.status(error.status).send({ message: error.message });
-    }
-  };
-
-  // 카드 이동
-  moveCard = async (req, res) => {
-    const { columnId, cardId } = req.params;
-
-    try {
-      const { status, message } = await this.cardService.moveCard();
 
       res.status(status).send({ message });
     } catch (error) {
