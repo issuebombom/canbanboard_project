@@ -1,8 +1,7 @@
-const { Board, UserBoard } = require('../models');
+const { Board, UserBoard, User } = require('../models');
 const CustomError = require('../error');
 
 class UserBoardService {
-
   createUserBoard = async (userId, boardId) => {
     const createUserBoard = await UserBoard.create({ userId, boardId });
     return createUserBoard;
@@ -15,6 +14,15 @@ class UserBoardService {
     }
     boards = boards.map((board) => board.Board);
     return boards;
+  };
+
+  inviteBoard = async (email, boardId) => {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new CustomError(404, '유저가 존재하지 않습니다.');
+    }
+    await this.userCardService.create({ userId: user.userId, boardId });
   };
 }
 
