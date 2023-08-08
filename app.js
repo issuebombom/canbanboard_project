@@ -13,8 +13,8 @@ const passportConfig = require('./passport');
 
 const authRouter = require('./routes/auth.router');
 const userRouter = require('./routes/user.router');
+const cardRouter = require('./routes/card.router');
 const boardRouter = require('./routes/board.router');
-// const cardRouter = require('./routes/card.router');
 const columnRouter = require('./routes/column.router');
 // const commentRouter = require('./routes/comment.router');
 
@@ -47,7 +47,7 @@ app.use(passport.session()); // req.session 객체에 passport정보를 추가 �
 
 //* 라우터
 app.use('/auth', authRouter);
-app.use('/api', [userRouter, columnRouter, boardRouter]);
+app.use('/api', [userRouter, columnRouter, cardRouter, boardRouter]);
 
 app.listen(port, () => {
   console.log(port, '포트로 접속하였습니다.');
