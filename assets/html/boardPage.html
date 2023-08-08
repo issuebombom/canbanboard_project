@@ -168,19 +168,19 @@
             </div>
           </div>
         <div class="d-flex flex-wrap justify-content-around columnBox">
-            <div class="column m-9">
+            <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName1">
                     <button type="button" class="btn btn-secondary">수정</button>
                 </div>
                 <div class="cardBox">
-                    <div class="card">
+                    <div draggable="true" class="card">
                         <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
             </div>
-            <div class="column m-9">
+            <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName2">
                     <button type="button" class="btn btn-secondary">수정</button>
@@ -189,26 +189,26 @@
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
             </div>
-            <div class="column m-9">
+            <div draggable="true" class="column m-9">
                 <div>
                     <input type="text" class="form-control" id="columnName" value="columnName3">
                     <button type="button" class="btn btn-secondary">수정</button>
                 </div>
                 <div class="cardBox">
-                    <div class="card">
+                    <div draggable="true" class="card">
                         <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
                     </div>
-                    <div class="card">
+                    <div draggable="true" class="card">
                         <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName">
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
             </div>
-            <div>
-                <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
-            </div>
         </div>
         
+        <div>
+            <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
+        </div>
     </main>
     <script>
         function userInfo(){
@@ -262,6 +262,51 @@
             if($('#modalCardCreate').css('display') != 'none'){
                 $('#modalCardCreate').hide();
             }
+        }
+
+        //드래그
+        const columnDraggables = document.querySelectorAll('.column');
+        const boardContainer = document.querySelectorAll(".columnBox");
+
+        columnDraggables.forEach(draggable => {
+            draggable.addEventListener("dragstart", () => {
+                draggable.classList.add("dragging");
+            });
+
+            draggable.addEventListener("dragend", () => {
+                draggable.classList.remove("dragging");
+            });
+        });
+        boardContainer.forEach(container => {
+            container.addEventListener("dragover", e => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientX);
+                const draggable = document.querySelector(".dragging");
+                if (afterElement === undefined) {
+                container.appendChild(draggable);
+                } else {
+                container.insertBefore(draggable, afterElement);
+                }
+            });
+        });
+        function getDragAfterElement(container, x) {
+            const draggableElements = [
+                ...container.querySelectorAll(".column:not(.dragging)"),
+            ];
+
+            return draggableElements.reduce(
+                (closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = x - box.left - box.width /2;
+
+                    if(offset < 0 && offset > closest.offset) {
+                        return {offset:offset, element:child}
+                    }else {
+                        return closest;
+                    }
+                },
+                {offset: Number.NEGATIVE_INFINITY},
+            ).element;
         }
       </script>
 </body>
