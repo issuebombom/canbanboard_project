@@ -1,6 +1,5 @@
 const BoardService = require('../services/board.service');
 const UserBoardService = require('../services/userboard.service');
-const { uuid } = require('uuid');
 
 class BoardController {
   boardService = new BoardService();
@@ -9,7 +8,6 @@ class BoardController {
   createBoard = async (req, res) => {
     const { name, description, color } = req.body;
     const user = req.user;
-    const totalColumnsNum = [{ column: 'column1' }, { column: 'column2' }, { column: 'column2' }];
 
     try {
       const board = await this.boardService.createBoard({
@@ -17,14 +15,12 @@ class BoardController {
         description,
         admins: user.userId,
         color,
-        totalColumnsNum: totalColumnsNum,
       });
       const userBoard = await this.userBoardService.createUserBoard({
-        userBoardId: uuid,
         userId: user.userId,
         boardId: board.boardId,
       });
-      return res.send({ data: board, userBoard });
+      return res.send({ message: '보드 생성 완료' });
     } catch (err) {
       console.error(err.stack);
       return res.status(err.status || 500).send({ message: `${err.message}` });
@@ -71,8 +67,7 @@ class BoardController {
     const { boardId } = req.params;
     const user = req.user;
     try {
-      // const dstUserBoard = await this.UserBoardService.destroyUserBoard(boardId, user);
-      const dstBoard = await this.boardService.deleteBoard(boardId, user);
+      await this.boardService.deleteBoard(boardId, user);
       return res.send({ message: '삭제되었습니다.' });
     } catch (err) {
       console.error(err.stack);

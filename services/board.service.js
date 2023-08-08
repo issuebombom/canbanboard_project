@@ -8,7 +8,6 @@ class BoardService {
       description,
       admins,
       color,
-      totalColumnsNum,
     });
     return createdBoard;
   };
@@ -37,28 +36,15 @@ class BoardService {
 
   deleteBoard = async (boardId, user) => {
     const board = await Board.findOne({ where: { boardId } });
-    console.log(board.admins);
     if (!board) {
       throw new CustomError(404, '보드 정보가 없습니다.');
     }
-    if (user.userId !== Number(board.admins)) {
+    if (user.userId !== board.admins) {
       throw new CustomError(403, '보드 삭제 권한이 존재하지 않습니다.');
     }
-    const deystroyedUserBoard = await UserBoard.destroy({ where: { boardId } });
+    // const deystroyedUserBoard = await UserBoard.destroy({ where: { boardId } });
     const deystroyedBoard = await Board.destroy({ where: { boardId } });
     return deystroyedBoard;
-  };
-
-  inviteBoard = async (email, boardId) => {
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      throw new CustomError(404, '회원이 존재하지 않습니다.');
-    }
-    const board = await Board.findOne({ where: { boardId } });
-    board.admins += user.userId;
-    console.log(board.admins);
-
-    const invitedBoard = await Board.update({ admins: board.admins }, { where: { boardId } });
   };
 }
 
