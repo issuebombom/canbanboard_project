@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const memorystore = require('memorystore');
 const MemoryStore = memorystore(session);
+const path = require('path');
 // const Server = require('http)'
 // const socketIo = require('socket.io)'
 
@@ -17,6 +18,7 @@ const boardRouter = require('./routes/board.router');
 const cardRouter = require('./routes/card.router');
 const columnRouter = require('./routes/column.router');
 const commentRouter = require('./routes/comment.router');
+const pageRouter = require('./routes/page.router');
 
 const app = express();
 const port = 3000;
@@ -45,10 +47,11 @@ app.use(
 app.use(passport.initialize()); // 요청 객체에 passport 설정을 심음
 app.use(passport.session()); // req.session 객체에 passport정보를 추가 저장
 
-app.use(express.static('./assets'));
 //* 라우터
+app.use(express.static(path.join(__dirname, 'assets')));
+app.use('/', pageRouter);
 app.use('/auth', authRouter);
-app.use('/api', [userRouter, columnRouter, cardRouter, boardRouter]);
+app.use('/api', [userRouter, columnRouter, cardRouter, boardRouter, commentRouter]);
 
 app.listen(port, () => {
   console.log(port, '포트로 접속하였습니다.');
