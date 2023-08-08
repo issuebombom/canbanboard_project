@@ -46,12 +46,16 @@
               </div>
             <div class="buttonGroup" style="padding-left: 35%;">
                 <button id="loginBtn" type="button" class="btn btn-secondary">로그인</button>
-                <button type="button" class="btn btn-secondary">회원가입</button>
+                <button type="button" class="btn btn-secondary" onclick="signupBtn()">회원가입</button>
+
             </div>
         </div>                   
     </main>
 </body>
 <script>
+  function signupBtn() {
+        window.location.replace('./html/signup.html');
+      }
   document.getElementById('loginBtn').addEventListener('click', async function login() {
       const email = document.getElementById('email').value;
       const password = document.getElementById('inputPassword').value;
