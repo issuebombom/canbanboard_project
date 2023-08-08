@@ -90,6 +90,18 @@ class CardService {
 
     return { status: 200, message: '카드를 삭제하였습니다.' };
   };
+
+  inviteUser = async (cardId, email) => {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new CustomError(404, '유저가 존재하지 않습니다.');
+    }
+
+    // userCard 생성
+    await this.userCardService.createUserCard(user.userId, Number(cardId));
+    return { status: 200, message: '유저를 카드에 초대하였습니다.' };
+  };
 }
 
 module.exports = CardService;

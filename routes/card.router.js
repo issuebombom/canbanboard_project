@@ -18,4 +18,7 @@ router.put('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.putCar
 // 카드 삭제
 router.delete('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.deleteCard);
 
+// 카드에 유저를 초대합니다. (작업자 추가)
+router.post('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.inviteUser);
+
 module.exports = router;
