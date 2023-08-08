@@ -1,0 +1,59 @@
+* {
+    font-family: 'Jua', sans-serif;
+}
+.mytitle {
+    width: 100vw;
+    box-sizing: border-box;
+    height: 150px;
+    font-size: 17px;
+  
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('https://i.postimg.cc/WzFLRMgm/My-Photo-1218898596-0549.jpg');
+    background-position: center;
+    background-size: contain;
+  
+    color: white;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 20px 0;
+}
+
+.infoBtn {
+    margin: 10% 10% 10% 90%;
+}
+
+.boardBox {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+
+    border-radius: 10px;
+    background-color: var(--bg-card-color);
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px;
+
+}
+
+.board {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+
+    border-radius: 10px;
+    background-color: var(--bg-card-color);
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px;
+}
+
+.boardBtn {
+    margin: 10% auto auto 45%;
+}
+
+.listBtn {
+    margin: 10% auto auto 90%;
+}

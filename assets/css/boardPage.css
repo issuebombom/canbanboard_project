@@ -1,0 +1,85 @@
+* {
+    font-family: 'Jua', sans-serif;
+}
+.mytitle {
+    width: 100vw;
+    box-sizing: border-box;
+    height: 150px;
+    font-size: 17px;
+  
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('https://i.postimg.cc/WzFLRMgm/My-Photo-1218898596-0549.jpg');
+    background-position: center;
+    background-size: contain;
+  
+    color: white;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 20px 0;
+}
+
+header>div{
+    margin-top: 10%;
+}
+
+header>div>label {
+    margin-left: 5%;
+}
+
+.infoBtn {
+    margin: auto 10% auto 90%;
+}
+
+.columnBox {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+
+    border-radius: 10px;
+    background-color: var(--bg-card-color);
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px;
+
+}
+
+.column {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+
+    border-radius: 10px;
+    background-color: var(--bg-card-color);
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px;
+}
+
+.cardBox {
+    width: 300px;
+    height: auto;
+    min-height: 100px;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.card {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    justify-self: center;
+}
+
+.columnBtn {
+    margin: 10% auto 10% 45%;
+}
+
+.column>button {
+    margin: auto auto auto 25%;
+}
