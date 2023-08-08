@@ -71,7 +71,7 @@ class BoardController {
     const { email } = req.body;
     const { boardId } = req.params;
     try {
-      const ivtBoard = await this.userBoardService.inviteBoard(email, boardId);
+      const ivtBoard = await this.boardService.inviteBoard(email, boardId);
       return res.send({ message: '초대하였습니다.' });
     } catch (err) {
       console.error(err.stack);

@@ -22,6 +22,6 @@ router.put('/boards/:boardId', isLoggedIn, boardController.modifyBoard);
 router.delete('/boards/:boardId', isLoggedIn, boardController.deleteBoard);
 
 // 보드 초대
-// router.put('/boards/:boardId/invite', isLoggedIn, boardController.inviteBoard);
+router.post('/boards/:boardId/invite', isLoggedIn, boardController.inviteBoard);
 
 module.exports = router;

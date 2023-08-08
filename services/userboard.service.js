@@ -18,11 +18,13 @@ class UserBoardService {
 
   inviteBoard = async (email, boardId) => {
     const user = await User.findOne({ where: { email } });
-
+    console.log(user);
     if (!user) {
-      throw new CustomError(404, '유저가 존재하지 않습니다.');
+      throw new CustomError(404, '초대하신 유저가 존재하지않습니다.');
     }
-    await this.userCardService.create({ userId: user.userId, boardId });
+
+    const invitedBoard = await UserBoard.create({ userId: user.userId, boardId });
+    return invitedBoard;
   };
 }
 
