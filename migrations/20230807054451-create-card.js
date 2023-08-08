@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Cards", {
+    await queryInterface.createTable('Cards', {
       cardId: {
         allowNull: false,
         autoIncrement: true,
@@ -12,6 +12,11 @@ module.exports = {
       columnId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Columns',
+          key: 'columnId',
+        },
+        onDelete: 'CASCADE',
       },
       name: {
         allowNull: false,
@@ -41,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Cards");
+    await queryInterface.dropTable('Cards');
   },
 };

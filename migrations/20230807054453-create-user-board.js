@@ -15,6 +15,7 @@ module.exports = {
           model: 'Users',
           key: 'userId',
         },
+        onDelete: 'CASCADE'
       },
       boardId: {
         type: Sequelize.INTEGER,
@@ -22,6 +23,7 @@ module.exports = {
           model: 'Boards',
           key: 'boardId',
         },
+        onDelete: 'CASCADE'
       },
     });
   },
