@@ -23,7 +23,7 @@ class UserController {
       const { nickname } = req.body;
 
       await this.userService.editUser(userId, nickname);
-      return res.send({message: '회원 정보 수정 완료'})
+      return res.send({ message: '회원 정보 수정 완료' });
     } catch (err) {
       console.error(err.stack);
       return res.status(err.status).send({ message: `${err.message}` });
@@ -33,15 +33,15 @@ class UserController {
   deleteUser = async (req, res) => {
     try {
       const me = req.user;
-      const { password } = req.body
+      const { password } = req.body;
 
-      await this.userService.deleteUser(me.userId, password, me.password)
-      return res.send({message: '탈퇴 완료'})
+      await this.userService.deleteUser(me.userId, password, me.password);
+      return res.send({ message: '탈퇴 완료' });
     } catch (err) {
       console.error(err.stack);
       return res.status(err.status).send({ message: `${err.message}` });
     }
-  }
+  };
 }
 
 module.exports = UserController;
