@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       admins: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       color: {
         type: Sequelize.STRING

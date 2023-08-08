@@ -5,14 +5,25 @@ module.exports = {
     await queryInterface.createTable('UserBoards', {
       userBoardId: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
       userId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'userId',
+        },
+        onDelete: 'CASCADE'
       },
       boardId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Boards',
+          key: 'boardId',
+        },
+        onDelete: 'CASCADE'
       },
     });
   },
