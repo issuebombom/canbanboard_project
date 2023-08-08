@@ -11,9 +11,17 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'userId',
+        },
       },
       boardId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Boards',
+          key: 'boardId',
+        },
       },
     });
   },
