@@ -11,10 +11,10 @@ class CardService {
     const findOneCard = await Card.findOne({ where: { order } });
     const findOneColumn = await Column.findByPk(columnId);
 
-    if (findOneCard) {
-      throw new CustomError(409, '이미 존재하는 순서입니다.');
-      // body 데이터가 정상적으로 전달되지 않은 경우
-    } else if (!name || !order) {
+    // if (findOneCard) {
+    //   throw new CustomError(409, '이미 존재하는 순서입니다.');
+    // body 데이터가 정상적으로 전달되지 않은 경우}
+    if (!name || !order) {
       throw new CustomError(412, '데이터 형식이 올바르지 않습니다.');
     } else if (!findOneColumn) {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
