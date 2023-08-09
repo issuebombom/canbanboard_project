@@ -1,4 +1,4 @@
-function createCard(event) {
+function createCard(columnId, event) {
   if ($('#modalCardCreate').css('display') == 'none') {
     $('#modalCardCreate').show();
   }
