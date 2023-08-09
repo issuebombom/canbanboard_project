@@ -101,6 +101,29 @@
         function boardDetailPage() {
             window.location.replace(`./boardPage.html`);
         }
+
+        // -------보드 목록 나열
+        $(document).ready(() => {
+          const boardBox = document.querySelector('.boardBox')
+
+          getData((data) => {
+            data.forEach((data) => {
+              console.log(data)
+            })
+          })
+        })
+
+        async function getData(callback) {
+          try {
+            const response = await fetch('/api/boards')
+            const data = await response.json();
+            if (response.ok) {
+              callback(data.data)
+            }
+          } catch (err) {
+            alert(err.message)
+          }
+        }
     </script>
 </body>
 </html>
