@@ -326,51 +326,52 @@
           </div>
         </div>
       </div>
-      <div id="columnLists" class="d-flex flex-wrap justify-content-around columnBox">
-        <div draggable="true" class="column m-9">
-          <div>
-            <input type="text" class="form-control" id="columnName" value="columnName1">
-            <button id="mdfColumnBtn" type="button" class="btn btn-info">수정</button>
-            <button id="dltColumnBtn" type="button" class="btn btn-danger">삭제</button>
-          </div>
-          <div draggable="true" class="cardBox">
-            <div draggable="true" class="card" onclick="updateCard()">
-              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
-            </div>
-          </div>
-          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+    </div>
+    <div id="columnLists" class="d-flex flex-wrap justify-content-around columnBox">
+      <div draggable="true" class="column m-9">
+        <div>
+          <input type="text" class="form-control" id="columnName" value="columnName1">
+          <button id="mdfColumnBtn" type="button" class="btn btn-info">수정</button>
+          <button id="dltColumnBtn" type="button" class="btn btn-danger">삭제</button>
         </div>
-        <div draggable="true" class="column m-9">
-          <div>
-            <input type="text" class="form-control" id="columnName" value="columnName2">
-            <button type="button" class="btn btn-info">수정</button>
-            <button type="button" class="btn btn-danger">삭제</button>
+        <div draggable="true" class="cardBox">
+          <div draggable="true" class="card" onclick="updateCard()">
+            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
           </div>
-          <div draggable="true" class="cardBox">
-          </div>
-          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
         </div>
-        <div draggable="true" class="column m-9">
-          <div>
-            <input type="text" class="form-control" id="columnName" value="columnName3">
-            <button type="button" class="btn btn-info">수정</button>
-            <button type="button" class="btn btn-danger">삭제</button>
-          </div>
-          <div draggable="true" class="cardBox">
-            <div draggable="true" class="card" onclick="updateCard()">
-              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName2">
-            </div>
-            <div draggable="true" class="card" onclick="updateCard()">
-              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName3">
-            </div>
-          </div>
-          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
-        </div>
+        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
       </div>
+      <div draggable="true" class="column m-9">
+        <div>
+          <input type="text" class="form-control" id="columnName" value="columnName2">
+          <button type="button" class="btn btn-info">수정</button>
+          <button type="button" class="btn btn-danger">삭제</button>
+        </div>
+        <div draggable="true" class="cardBox">
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+      </div>
+      <div draggable="true" class="column m-9">
+        <div>
+          <input type="text" class="form-control" id="columnName" value="columnName3">
+          <button type="button" class="btn btn-info">수정</button>
+          <button type="button" class="btn btn-danger">삭제</button>
+        </div>
+        <div draggable="true" class="cardBox">
+          <div draggable="true" class="card" onclick="updateCard()">
+            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName2">
+          </div>
+          <div draggable="true" class="card" onclick="updateCard()">
+            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName3">
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+      </div>
+    </div>
 
-      <div>
-        <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
-      </div>
+    <div>
+      <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
+    </div>
   </main>
   <script>
     function userInfo() {
