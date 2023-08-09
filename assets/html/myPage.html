@@ -31,6 +31,7 @@
     </div>
   </header>
     <main>
+      <!-- 비밀번호 변경 모달 -->
       <div class="modal" id="modal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -65,6 +66,7 @@
           </div>
         </div>
       </div>
+      <!-- 마이페이지 -->
         <div style="width: 500px; margin: 100px auto auto auto;">
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
@@ -86,6 +88,7 @@
         </div>                   
     </main>
     <script>
+      //비밀번호 변경 모달 온/오프
       function passwordChangeBtn(){
         if($('#modal').css('display') == 'none'){
           $('#modal').show();
