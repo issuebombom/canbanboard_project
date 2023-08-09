@@ -519,7 +519,7 @@
           const offset = x - box.left - box.width / 2;
 
           if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child }
+            return { offset: offset, element: child };
           } else {
             return closest;
           }
@@ -564,7 +564,7 @@
           const offset = x - box.left - box.width / 2;
 
           if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child }
+            return { offset: offset, element: child };
           } else {
             return closest;
           }
@@ -576,12 +576,11 @@
     const getBoardId = () => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get('boardId');
-    }
+    };
     const getcolumnId = () => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get('columnId');
-    }
-
+    };
 
     $(document).ready(() => {
       const boardId = getBoardId();
@@ -593,19 +592,19 @@
     const getBoard = async (boardId) => {
       const response = await fetch(`/api/boards/${boardId}`);
       const boardInfo = await response.json();
-      let { name, description } = boardInfo.data
+      let { name, description } = boardInfo.data;
       const boardName = document.getElementById('boardName');
       const boardDesc = document.getElementById('boardDesc');
-      boardName.innerText = `${name}`
-      boardDesc.innerText = `${description}`
-    }
+      boardName.innerText = `${name}`;
+      boardDesc.innerText = `${description}`;
+    };
 
     async function getColumns(boardId) {
       try {
         const response = await fetch(`/api/boards/${boardId}/columns`);
         const data = await response.json();
         const columns = data.columns;
-        console.log(columns)
+        console.log(columns);
 
         const columnLists = document.getElementById('columnLists');
         columnLists.innerHTML = '';
@@ -635,7 +634,7 @@
       const response = await fetch(`/api/columns/${columnId}/cards`);
       const data = await response.json();
       const cards = data.data;
-      console.log(cards)
+      console.log(cards);
       return cards.map((card) => `
         <div draggable="true" class="card" onclick="updateCard(${columnId},${card.cardId})">
           <input type="text" readonly class="form-control-plaintext" id="cardName" value="${card.name}">

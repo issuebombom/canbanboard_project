@@ -47,7 +47,7 @@ class CardService {
   };
 
   // 카드 수정
-  putCard = async (userId, columnId, cardId, name, order, description, expiredDate, color) => {
+  putCard = async (userId, columnId, cardId, name, description, expiredDate, color) => {
     const cards = await this.userCardService.getJoinCard(userId);
     const column = await Column.findByPk(columnId);
     let card = await Card.findByPk(cardId);
@@ -62,7 +62,6 @@ class CardService {
 
     // 수정할 데이터가 존재 하면 수정 후 저장
     if (name) card.name = name;
-    if (order) card.order = order;
     if (description) card.description = description;
     if (expiredDate) card.expiredDate = new Date(expiredDate);
     if (color) card.color = color;

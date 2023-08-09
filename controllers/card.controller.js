@@ -45,7 +45,7 @@ class CardController {
   putCard = async (req, res) => {
     const { columnId, cardId } = req.params;
     const userId = req.user.userId;
-    const { name, order, description, expiredDate, color } = req.body;
+    const { name, description, expiredDate, color } = req.body;
 
     try {
       const { status, message } = await this.cardService.putCard(
@@ -53,7 +53,6 @@ class CardController {
         columnId,
         cardId,
         name,
-        order,
         description,
         expiredDate,
         color
