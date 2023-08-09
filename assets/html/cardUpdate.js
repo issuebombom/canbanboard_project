@@ -1,5 +1,5 @@
 //카드 수정 버튼 클릭시 온/오프
-function modalCardUpdate() {
+function modalCardUpdate(columnId, cardId) {
   if ($('#modalCardUpdate').css('display') == 'none') {
     $('#modalCardUpdate').show();
     $('#modalCardGet').hide();
@@ -8,8 +8,6 @@ function modalCardUpdate() {
   const cardUpdateBtn = $('#cardUpdateBtn');
   cardUpdateBtn.on('click', async () => {
     // 컬럼id와 카드id를 가져올 수 있어야 함
-    const columnId = 1; // 수정 필요
-    const cardId = 1; // 수정 필요
     const name = $('#cardupdateTitle').val();
     const description = $('#cardupdateContent').val();
     const color = $('#cardupdateColor').val();
