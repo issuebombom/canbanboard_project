@@ -31,6 +31,7 @@
     </div>
   </header>
     <main>
+      <!-- 비밀번호 변경 모달 -->
       <div class="modal" id="modal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -40,7 +41,13 @@
             </div>
             <div class="modal-body">
               <div class="mb-3 row">
-                <label for="inputChanePwd" class="col-sm-2 col-form-label">Password</label>
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="inputChanePwd" class="col-sm-2 col-form-label">ChangePwd</label>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="inputChanePwd">
                 </div>
@@ -59,6 +66,7 @@
           </div>
         </div>
       </div>
+      <!-- 마이페이지 -->
         <div style="width: 500px; margin: 100px auto auto auto;">
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
@@ -72,12 +80,6 @@
                       <input type="nickname" class="form-control" id="nickname">
                     </div>
                   </div>
-              <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword">
-                </div>
-              </div>
             <div class="buttonGroup" style="padding-left: 25%;">
                 <button type="button" class="btn btn-info" onclick="passwordChangeBtn()">비밀번호 수정</button>
                 <button type="button" class="btn btn-primary">수정</button>
@@ -86,6 +88,7 @@
         </div>                   
     </main>
     <script>
+      //비밀번호 변경 모달 온/오프
       function passwordChangeBtn(){
         if($('#modal').css('display') == 'none'){
           $('#modal').show();

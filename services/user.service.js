@@ -35,12 +35,22 @@ class UserService {
     const user = await this.notExistsCheck(userId);
     user.nickname = nickname;
     return await user.save();
-    // return await User.update(
-    //   {
-    //     nickname,
-    //   },
-    //   { where: { userId } }
-    // );
+  };
+
+  editUserPassword = async (userId, password, changePassword, confirmPassword) => {
+    const user = await this.notExistsCheck(userId);
+    await this.comparePassword(password, user.password);
+
+    if (password === changePassword) {
+      throw new CustomError(400, '기존 비밀번호와 변경할 비밀번호가 일치합니다.');
+    }
+    if (changePassword !== confirmPassword) {
+      throw new CustomError(400, '변경할 비밀번호와 비밀번호 확인이 불일치');
+    }
+
+    const hash = bcrypt.hashSync(changePassword, 12);
+    user.password = hash;
+    return await user.save();
   };
 
   deleteUser = async (userId, password, realPassword) => {

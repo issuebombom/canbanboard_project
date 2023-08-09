@@ -60,9 +60,9 @@ class AuthController {
       req.logout((err) => {
         if (err instanceof Error) throw err;
       });
-      req.session.destroy((err) => {
-        if (err instanceof Error) throw err;
-      }); // 로그인인증 수단으로 사용한 세션쿠키를 지우고 파괴
+      // req.session.destroy((err) => {
+      //   if (err instanceof Error) throw err;
+      // }); // 로그인인증 수단으로 사용한 세션쿠키를 지우고 파괴
       res.send({ message: '로그아웃 완료' });
     } catch (err) {
       console.error(err.stack);
