@@ -91,3 +91,7 @@ header>div>label {
 .cardMembers {
     display: none;
 }
+
+#commentBox {
+    display: none;
+}
