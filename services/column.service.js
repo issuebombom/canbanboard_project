@@ -9,8 +9,6 @@ class ColumnService {
       throw new CustomError(404, '보드가 존재하지 않습니다.');
     } else if (!order || !name) {
       throw new CustomError(400, '데이터 형식이 올바르지 않습니다.');
-    } else if (findOneColumn) {
-      throw new CustomError(400, '이미 존재하는 순서입니다.');
     }
 
     await Column.create({ boardId, name, order });
@@ -18,7 +16,7 @@ class ColumnService {
   };
 
   getAllColumn = async (boardId) => {
-    const findAllColumn = await Column.findAll({ boardId });
+    const findAllColumn = await Column.findAll({ where: { boardId } });
 
     return { status: 200, message: '', result: findAllColumn };
   };
