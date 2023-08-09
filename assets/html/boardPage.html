@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="nickname" class="col-sm-2 col-form-label">참여자</label>
+                      <button type="button" class="btn btn-light" onclick="memberBoardCheck()">참여자</button>
                     </div>
                     <div class="mb-3 row members">
                       <div class="col-sm-10 member">
@@ -99,9 +99,11 @@
                           <img src="../image/cat.jpg" style="width: 100px; height: 100px; border-radius: 50px;" />
                           <input type="text" readonly class="form-control-plaintext" id="nickname" value="nickname1">
                       </div>
-                      <div class="col-sm-10 member">
-                        <button type="button" class="btn btn-secondary" onclick="memberInvite()">member invite</button>
                     </div>
+                    <div class="col-sm-10">
+                      <label>email</label>
+                        <input type="email" class="form-control" id="inviteEmail">
+                        <button type="button" class="btn btn-secondary" style="margin-top: 3%;">member invite</button>
                     </div>
                     <div class="mb-3 row backgroundColor">
                         <label for="backgroundColor" class="col-sm-2 col-form-label">색상</label>
@@ -391,11 +393,6 @@
             window.location.replace('./myPage.html');
         }
 
-        //보드에 멤버 초대 페이지로 이동
-        function memberInvite() {
-            window.location.replace('./invitePage.html');
-        }
-
         //컬럼 생성 모달 온/오프
         function columnCreate() {
           if($('#modalColumnCreate').css('display') == 'none'){
@@ -469,6 +466,15 @@
           }
         }
 
+        //보드에 참여한 멤버 확인
+        function memberBoardCheck() {
+          if($('.members').css('display') == 'none'){
+            $('.members').show();
+          }
+          else if($('.members').css('display') != 'none'){
+            $('.members').hide();
+          }
+        }
         //컬럼 드래그
         const columnDraggables = document.querySelectorAll('.column');
         const boardContainer = document.querySelectorAll(".columnBox");
