@@ -145,3 +145,17 @@ async function colorPut() {
     }
   }
 }
+
+//보드 삭제
+//html 해당 버튼 id값 : boardDeleteBtn
+document.getElementById('boardDeleteBtn').addEventListener('click', async function () {
+  const api = await fetch(`/api/boards/1`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const { status } = await api;
+  const { result } = await api.json();
+  if (status == 200) {
+    window.location.replace('./mainPage.html');
+  }
+});
