@@ -222,10 +222,17 @@
                         <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
                         <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
                     </div>
-                    <div class="col-sm-10 member">
-                      <button type="button" class="btn btn-secondary">member invite</button>
-                  </div>
-                  </div>
+                  </div>                  
+                  <div class="mb-3 row">
+                    <select class="form-select" style="width: auto;" id='search_type'>
+                      <option value="none">선택해주세요</option>
+                      <option value="email1">email1</option>
+                      <option value="email2">email2</option>
+                    </select>
+                    <div class="col-sm-10">
+                      <button type="button" class="btn btn-secondary">member +</button>
+                    </div>
+              </div>
                   <div>
                     <button type="button" class="btn btn-secondary" onclick="commentBox()">댓글 작성</button>
                   </div>
