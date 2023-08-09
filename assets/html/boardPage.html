@@ -212,8 +212,10 @@
                     <!-- https://programmer93.tistory.com/5#google_vignette -->
                     <input type="date" class="form-control-plaintext" readonly id="expiredDate" value="2023-08-11">
                   </div>
+                  <div class="mb-3 row">
+                    <button type="button" class="btn btn-light" onclick="memberCheck()">참여한 멤버 확인</button>
+                  </div>
                   <div class="mb-3 row cardMembers">
-                    <label>members</label>
                     <div class="col-sm-10 cardMember">
                         <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
                         <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
@@ -454,6 +456,16 @@
         function closeCardUpdateModal() {
           if($('#modalCardUpdate').css('display') != 'none'){
             $('#modalCardUpdate').hide();
+          }
+        }
+
+        //참여한 멤버 확인 버튼 온/오프
+        function memberCheck(){
+          if($('.cardMembers').css('display') == 'none'){
+            $('.cardMembers').show();
+          }
+          else if($('.cardMembers').css('display') != 'none'){
+            $('.cardMembers').hide();
           }
         }
 
