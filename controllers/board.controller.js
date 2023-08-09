@@ -71,8 +71,19 @@ class BoardController {
     const { email } = req.body;
     const { boardId } = req.params;
     try {
-      const ivtBoard = await this.boardService.inviteBoard(email, boardId);
+      const ivtBoard = await this.userBoardService.inviteBoard(email, boardId);
       return res.send({ message: '초대하였습니다.' });
+    } catch (err) {
+      console.error(err.stack);
+      return res.status(err.status || 500).send({ message: `${err.message}` });
+    }
+  };
+
+  getJoinUser = async (req, res) => {
+    const { boardId } = req.params;
+    try {
+      const joinUser = await this.userBoardService.getJoinUser(boardId);
+      return res.send({ data: joinUser });
     } catch (err) {
       console.error(err.stack);
       return res.status(err.status || 500).send({ message: `${err.message}` });

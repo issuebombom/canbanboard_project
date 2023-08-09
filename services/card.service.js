@@ -19,7 +19,7 @@ class CardService {
     } else if (!findOneColumn) {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     }
-    console.log(columnId, name, order, description, expiredDate, color)
+    console.log(columnId, name, order, description, expiredDate, color);
     const card = await Card.create({
       columnId,
       name,
@@ -100,6 +100,12 @@ class CardService {
     // userCard 생성
     await this.userCardService.createUserCard(user.userId, Number(cardId));
     return { status: 200, message: '유저를 카드에 초대하였습니다.' };
+  };
+
+  getDetailCard = async (cardId) => {
+    const findOneCard = await Card.findOne({ where: { cardId } });
+
+    return { status: 200, message: '', data: findOneCard };
   };
 }
 

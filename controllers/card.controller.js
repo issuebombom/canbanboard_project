@@ -1,8 +1,8 @@
 const CardService = require('../services/card.service');
-
+const UserCardService = require('../services/usercard.service');
 class CardController {
   cardService = new CardService();
-
+  userCardService = new UserCardService();
   // 카드 생성
   postCard = async (req, res) => {
     const { columnId } = req.params;
@@ -88,6 +88,28 @@ class CardController {
       res.status(status).send({ message });
     } catch (error) {
       console.error(error.stack);
+      return res.status(error.status || 500).send({ message: error.message });
+    }
+  };
+
+  getDetailCard = async (req, res) => {
+    const { cardId } = req.params;
+    try {
+      const { status, message, data } = await this.cardService.getDetailCard(cardId);
+
+      res.status(status).send({ data });
+    } catch (error) {
+      console.error(error.stack);
+      return res.status(error.status || 500).send({ message: error.message });
+    }
+  };
+
+  getJoinUser = async (req, res) => {
+    try {
+      const { cardId } = req.params;
+      const data = await this.userCardService.getJoinUser(cardId);
+      return res.send({ data });
+    } catch (error) {
       return res.status(error.status || 500).send({ message: error.message });
     }
   };

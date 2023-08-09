@@ -21,4 +21,9 @@ router.delete('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.del
 // 카드에 유저를 초대합니다. (작업자 추가)
 router.post('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.inviteUser);
 
+// 카드 상세 조회
+router.get('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.getDetailCard);
+
+//카드 참여하는 멤버 조회
+router.get('/cards/:cardId/users', isLoggedIn, cardController.getJoinUser);
 module.exports = router;

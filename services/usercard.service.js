@@ -1,4 +1,4 @@
-const { Card, UserCard } = require('../models');
+const { Card, User, UserCard } = require('../models');
 const CustomError = require('../error');
 
 class UserCardService {
@@ -14,6 +14,15 @@ class UserCardService {
     }
     cards = cards.map((card) => card.Card);
     return cards;
+  };
+
+  getJoinUser = async (cardId) => {
+    let users = await UserCard.findAll({ where: { cardId }, include: [{ model: User }] });
+    if (!users) {
+      throw new CustomError(404, '참여자가 없습니다.');
+    }
+    users = users.map((user) => user.User);
+    return users;
   };
 }
 
