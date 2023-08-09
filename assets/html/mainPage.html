@@ -35,6 +35,7 @@
         </div>
     </header>
     <main>
+      <!-- 보드 생성 모달 -->
         <div class="modal" id="modalBoardCreate">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -57,7 +58,6 @@
                   </div>
                   <div class="mb-3 row">
                     <label for="boardColor" class="col-sm-2 col-form-label">색상</label>
-                    <!-- 색상 리스트자리 -->
                     <input type="color" class="form-control" id="boardColor">
                   </div>
                 </div>
@@ -68,6 +68,7 @@
               </div>
             </div>
           </div>
+          <!-- 생성한 보드 출력 -->
         <div class="d-flex flex-wrap justify-content-around boardBox">
             <div class="board m-4" onclick="boardDetailPage()">
                 <label for="boardName" class="col-sm-2 col-form-label">boardName</label>
@@ -82,10 +83,12 @@
         <button type="button" class="btn btn-secondary boardBtn" onclick="createBoard()">board create</button>
     </main>
     <script>
+        // 마이페이지로 이동
         function myPage(){
             window.location.replace('./myPage.html');
         }
 
+        //모달 온/오프
         function createBoard() {
             if($('#modalBoardCreate').css('display') == 'none'){
                 $('#modalBoardCreate').show();
@@ -98,6 +101,7 @@
             }
         }
 
+        //생성된 보드 선택시 해당 보드페이지로 이동
         function boardDetailPage() {
             window.location.replace(`./boardPage.html`);
         }

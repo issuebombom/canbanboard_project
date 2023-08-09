@@ -36,6 +36,7 @@
         </div>
     </header>
     <main>
+      <!-- 보드 생성자가 아닌 참여자인 경우의 userInfo모달 창 -->
         <div class="modal" id="modalNotAdmin">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -71,6 +72,7 @@
               </div>
             </div>
           </div>
+          <!-- 보드 생성자인경우의 모달창 -->
           <div class="modal" id="modalAdmin">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -86,7 +88,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                      <label for="nickname" class="col-sm-2 col-form-label">참여자</label>
+                      <button type="button" class="btn btn-light" onclick="memberBoardCheck()">참여자</button>
                     </div>
                     <div class="mb-3 row members">
                       <div class="col-sm-10 member">
@@ -97,9 +99,11 @@
                           <img src="../image/cat.jpg" style="width: 100px; height: 100px; border-radius: 50px;" />
                           <input type="text" readonly class="form-control-plaintext" id="nickname" value="nickname1">
                       </div>
-                      <div class="col-sm-10 member">
-                        <button type="button" class="btn btn-secondary" onclick="memberInvite()">member invite</button>
                     </div>
+                    <div class="col-sm-10">
+                      <label>email</label>
+                        <input type="email" class="form-control" id="inviteEmail">
+                        <button type="button" class="btn btn-secondary" style="margin-top: 3%;">member invite</button>
                     </div>
                     <div class="mb-3 row backgroundColor">
                         <label for="backgroundColor" class="col-sm-2 col-form-label">색상</label>
@@ -116,6 +120,7 @@
                 </div>
               </div>
           </div>
+          <!-- 컬럼 생성 모달 창 -->
           <div class="modal" id="modalColumnCreate">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -138,6 +143,7 @@
               </div>
             </div>
           </div>
+          <!-- 카드 생성 모달 창 -->
           <div class="modal" id="modalCardCreate">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -177,6 +183,7 @@
               </div>
             </div>
           </div>
+          <!-- 카드 상세보기 모달 창 -->
           <div class="modal" id="modalCardGet">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -207,6 +214,29 @@
                     <!-- https://programmer93.tistory.com/5#google_vignette -->
                     <input type="date" class="form-control-plaintext" readonly id="expiredDate" value="2023-08-11">
                   </div>
+                  <div class="mb-3 row">
+                    <button type="button" class="btn btn-light" onclick="memberCheck()">참여한 멤버 확인</button>
+                  </div>
+                  <div class="mb-3 row cardMembers">
+                    <div class="col-sm-10 cardMember">
+                        <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                        <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                    </div>
+                    <div class="col-sm-10 cardMember">
+                        <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                        <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                    </div>
+                  </div>                  
+                  <div class="mb-3 row">
+                    <select class="form-select" style="width: auto;" id='search_type'>
+                      <option value="none">선택해주세요</option>
+                      <option value="email1">email1</option>
+                      <option value="email2">email2</option>
+                    </select>
+                    <div class="col-sm-10">
+                      <button type="button" class="btn btn-secondary">member +</button>
+                    </div>
+              </div>
                   <div>
                     <button type="button" class="btn btn-secondary" onclick="commentBox()">댓글 작성</button>
                   </div>
@@ -242,16 +272,18 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeCardGetModal()">Close</button>
                   <button type="button" class="btn btn-primary" onclick="modalCardUpdate()">수정</button>
+                  <button type="button" class="btn btn-danger">삭제</button>
                 </div>
               </div>
             </div>
           </div>
+          <!-- 카드 수정 모달 창 -->
           <div class="modal" id="modalCardUpdate">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Card update</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeCardupdateModal()"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeCardUpdateModal()"></button>
                 </div>
                 <div class="modal-body">
                   <div class="mb-3 row">
@@ -279,12 +311,13 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeCardupdateModal()">Close</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeCardUpdateModal()">Close</button>
                   <button type="button" class="btn btn-primary" id="cardUpdateBtn">수정</button>
                 </div>
               </div>
             </div>
           </div>
+          <!-- 보드 상세 페이지 메인 -->
         <div class="d-flex flex-wrap justify-content-around columnBox">
             <div draggable="true" class="column m-9">
                 <div>
@@ -332,6 +365,7 @@
         </div>
     </main>
     <script>
+      // 유저정보 모달 창 온/ 오프
         function userInfo(){
             //req?에 저장된 user정보를 가지고 db에서 board를 찾아 비교해서 사용
         //   if($('#modalNotAdmin').css('display') == 'none'){
@@ -353,14 +387,13 @@
             $('#modalAdmin').hide();
           }
         }
+        
+        //마이페이지로 이동
         function myPage(){
             window.location.replace('./myPage.html');
         }
 
-        function memberInvite() {
-            window.location.replace('./invitePage.html');
-        }
-
+        //컬럼 생성 모달 온/오프
         function columnCreate() {
           if($('#modalColumnCreate').css('display') == 'none'){
             $('#modalColumnCreate').show();
@@ -373,6 +406,7 @@
             }
         }
         
+        //카드 생성 모달 온/오프
         function createCard() {
           if($('#modalCardCreate').css('display') == 'none'){
             $('#modalCardCreate').show();
@@ -385,6 +419,7 @@
             }
         }
 
+        //카드 수정 모달 온/오프
         function updateCard() {
           if($('#modalCardGet').css('display') == 'none'){
             $('#modalCardGet').show();
@@ -397,6 +432,7 @@
           }
         }
 
+        //댓글 작성란 버튼
         function commentBox() {
           if($('#commentBox').css('display') == 'none'){
             $('#commentBox').show();
@@ -406,6 +442,7 @@
           }
         }
 
+        //카드 수정 버튼 클릭시 온/오프
         function modalCardUpdate() {
           if($('#modalCardUpdate').css('display') == 'none'){
             $('#modalCardUpdate').show();
@@ -413,9 +450,29 @@
           }
         }
 
-        function closeCardupdateModal() {
+        function closeCardUpdateModal() {
           if($('#modalCardUpdate').css('display') != 'none'){
             $('#modalCardUpdate').hide();
+          }
+        }
+
+        //참여한 멤버 확인 버튼 온/오프
+        function memberCheck(){
+          if($('.cardMembers').css('display') == 'none'){
+            $('.cardMembers').show();
+          }
+          else if($('.cardMembers').css('display') != 'none'){
+            $('.cardMembers').hide();
+          }
+        }
+
+        //보드에 참여한 멤버 확인
+        function memberBoardCheck() {
+          if($('.members').css('display') == 'none'){
+            $('.members').show();
+          }
+          else if($('.members').css('display') != 'none'){
+            $('.members').hide();
           }
         }
         //컬럼 드래그
