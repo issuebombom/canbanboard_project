@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="nickname" class="col-sm-2 col-form-label">참여자</label>
+              <button type="button" class="btn btn-light" onclick="memberBoardCheck()">참여자</button>
             </div>
             <div class="mb-3 row members">
               <div class="col-sm-10 member">
@@ -100,251 +100,277 @@
                 <img src="../image/cat.jpg" style="width: 100px; height: 100px; border-radius: 50px;" />
                 <input type="text" readonly class="form-control-plaintext" id="nickname" value="nickname1">
               </div>
-              <div class="col-sm-10 member">
-                <button type="button" class="btn btn-secondary" onclick="memberInvite()">member invite</button>
+              <div class="col-sm-10">
+                <label>email</label>
+                <input type="email" class="form-control" id="inviteEmail">
+                <button type="button" class="btn btn-secondary" style="margin-top: 3%;">member invite</button>
+              </div>
+              <div class="mb-3 row backgroundColor">
+                <label for="backgroundColor" class="col-sm-2 col-form-label">색상</label>
+                <!-- 색상 리스트자리 -->
+                <input type="color" style="width: 200px; margin: 10px auto auto auto;" class="form-control"
+                  id="backgroundColor">
+                <button type="button" class="btn btn-info"
+                  style="width: 100px; margin: 10px auto auto auto;">저장</button>
               </div>
             </div>
-            <div class="mb-3 row backgroundColor">
-              <label for="backgroundColor" class="col-sm-2 col-form-label">색상</label>
-              <!-- 색상 리스트자리 -->
-              <input type="color" style="width: 200px; margin: 10px auto auto auto;" class="form-control"
-                id="backgroundColor">
-              <button type="button" class="btn btn-info" style="width: 100px; margin: 10px auto auto auto;">저장</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                onclick="closeAdminModal()">Close</button>
+              <button type="button" class="btn btn-primary" onclick="myPage()">my Page</button>
+              <button type="button" class="btn btn-danger">보드 삭제</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              onclick="closeAdminModal()">Close</button>
-            <button type="button" class="btn btn-primary" onclick="myPage()">my Page</button>
-            <button type="button" class="btn btn-danger">보드 삭제</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal" id="modalColumnCreate">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Column create</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-              onclick="closeColumnModal()"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <label for="columnName" class="col-sm-2 col-form-label">name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="columnName">
+      <div class="modal" id="modalColumnCreate">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Column create</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                onclick="closeColumnModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3 row">
+                <label for="columnName" class="col-sm-2 col-form-label">name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="columnName">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              onclick="closeColumnModal()">Close</button>
-            <button type="button" class="btn btn-primary" id="createColumnBtn">column 생성</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                onclick="closeColumnModal()">Close</button>
+              <button type="button" class="btn btn-primary" id="createColumnBtn">column 생성</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal" id="modalCardCreate">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Card create</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-              onclick="closeCardModal()"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <label for="cardTitle" class="col-sm-2 col-form-label">제목</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="cardTitle">
+      <div class="modal" id="modalCardCreate">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Card create</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                onclick="closeCardModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3 row">
+                <label for="cardTitle" class="col-sm-2 col-form-label">제목</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="cardTitle">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cardContent" class="col-sm-2 col-form-label">설명</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="cardContent" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cardColor" class="col-sm-2 col-form-label">색상</label>
+                <!-- 색상 리스트자리 -->
+                <input type="color" class="form-control" id="cardColor">
+              </div>
+              <div class="mb-3 row">
+                <label for="cardDate" class="col-sm-2 col-form-label">마감일자</label>
+                <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
+                <!-- https://programmer93.tistory.com/5#google_vignette -->
+                <input type="date" class="form-control" id="expiredDate">
               </div>
             </div>
-            <div class="mb-3 row">
-              <label for="cardContent" class="col-sm-2 col-form-label">설명</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" id="cardContent" rows="3"></textarea>
-              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                onclick="closeCardModal()">Close</button>
+              <button type="button" class="btn btn-primary" id="createCardBtn">생성</button>
             </div>
-            <div class="mb-3 row">
-              <label for="cardColor" class="col-sm-2 col-form-label">색상</label>
-              <!-- 색상 리스트자리 -->
-              <input type="color" class="form-control" id="cardColor">
-            </div>
-            <div class="mb-3 row">
-              <label for="cardDate" class="col-sm-2 col-form-label">마감일자</label>
-              <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
-              <!-- https://programmer93.tistory.com/5#google_vignette -->
-              <input type="date" class="form-control" id="expiredDate">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              onclick="closeCardModal()">Close</button>
-            <button type="button" class="btn btn-primary" id="createCardBtn">생성</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal" id="modalCardGet">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Card Name</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-              onclick="closeCardGetModal()"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <label for="cardTitle" class="col-sm-2 col-form-label">제목</label>
-              <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" id="cardTitle" value="cardName1">
+      <div class="modal" id="modalCardGet">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Card Name</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                onclick="closeCardGetModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3 row">
+                <label for="cardTitle" class="col-sm-2 col-form-label">제목</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="cardTitle" value="cardName1">
+                </div>
               </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="cardContent" class="col-sm-2 col-form-label">설명</label>
-              <div class="col-sm-10">
-                <textarea class="form-control-plaintext" readonly id="cardContent" rows="3"
-                  style="min-height: 50px;">content</textarea>
+              <div class="mb-3 row">
+                <label for="cardContent" class="col-sm-2 col-form-label">설명</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control-plaintext" readonly id="cardContent" rows="3"
+                    style="min-height: 50px;">content</textarea>
+                </div>
               </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="cardColor" class="col-sm-2 col-form-label">색상</label>
-              <input type="text" class="form-control-plaintext" readonly id="cardgetColor" value="#000000">
-            </div>
-            <div class="mb-3 row">
-              <label for="cardDate" class="col-sm-2 col-form-label">마감일자</label>
-              <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
-              <!-- https://programmer93.tistory.com/5#google_vignette -->
-              <input type="date" class="form-control-plaintext" readonly id="expiredDate" value="2023-08-11">
-            </div>
-            <div>
-              <button type="button" class="btn btn-secondary" onclick="commentBox()">댓글 작성</button>
-            </div>
-            <div id="commentBox">
-              <div id="commentBody">
+              <div class="mb-3 row">
+                <label for="cardColor" class="col-sm-2 col-form-label">색상</label>
+                <input type="text" class="form-control-plaintext" readonly id="cardgetColor" value="#000000">
+              </div>
+              <div class="mb-3 row">
+                <label for="cardDate" class="col-sm-2 col-form-label">마감일자</label>
+                <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
+                <!-- https://programmer93.tistory.com/5#google_vignette -->
+                <input type="date" class="form-control-plaintext" readonly id="expiredDate" value="2023-08-11">
+              </div>
+              <div class="mb-3 row">
+                <button type="button" class="btn btn-light" onclick="memberCheck()">참여한 멤버 확인</button>
+              </div>
+              <div class="mb-3 row cardMembers">
+                <div class="col-sm-10 cardMember">
+                  <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                  <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                </div>
+                <div class="col-sm-10 cardMember">
+                  <img src="../image/cat.jpg" style="width: 50px; height: 50px; border-radius: 50px;" />
+                  <input type="text" readonly class="form-control-plaintext" id="CardNickname" value="nickname1">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <select class="form-select" style="width: auto;" id='search_type'>
+                  <option value="none">선택해주세요</option>
+                  <option value="email1">email1</option>
+                  <option value="email2">email2</option>
+                </select>
+                <div class="col-sm-10">
+                  <button type="button" class="btn btn-secondary">member +</button>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-secondary" onclick="commentBox()">댓글 작성</button>
+              </div>
+              <div id="commentBox">
+                <div id="commentBody">
+                  <div class="mb-3 row">
+                    <label for="cardTitle" class="col-sm-2 col-form-label">nickname</label>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="cardContent" class="col-sm-2 col-form-label">댓글작성란</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="cardContent" rows="3" style="min-height: 50px;"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-secondary" onclick="commentBox()">취소</button>
+                  <button type="button" class="btn btn-secondary" id="commentSumbit">작성</button>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cardDate" class="col-sm-2 col-form-label">댓글</label>
                 <div class="mb-3 row">
                   <label for="cardTitle" class="col-sm-2 col-form-label">nickname</label>
                 </div>
                 <div class="mb-3 row">
-                  <label for="cardContent" class="col-sm-2 col-form-label">댓글작성란</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="cardContent" rows="3" style="min-height: 50px;"></textarea>
+                    <textarea class="form-control-plaintext" readonly id="cardContent" rows="3"
+                      style="min-height: 50px;">comment</textarea>
                   </div>
                 </div>
               </div>
-              <div>
-                <button type="button" class="btn btn-secondary" onclick="commentBox()">취소</button>
-                <button type="button" class="btn btn-secondary" id="commentSumbit">작성</button>
-              </div>
             </div>
-            <div class="mb-3 row">
-              <label for="cardDate" class="col-sm-2 col-form-label">댓글</label>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                onclick="closeCardGetModal()">Close</button>
+              <button type="button" class="btn btn-primary" onclick="modalCardUpdate()">수정</button>
+              <button type="button" class="btn btn-danger">삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="modalCardUpdate">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Card update</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                onclick="closeCardupdateModal()"></button>
+            </div>
+            <div class="modal-body">
               <div class="mb-3 row">
-                <label for="cardTitle" class="col-sm-2 col-form-label">nickname</label>
-              </div>
-              <div class="mb-3 row">
+                <label for="cardupdateTitle" class="col-sm-2 col-form-label">제목</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control-plaintext" readonly id="cardContent" rows="3"
-                    style="min-height: 50px;">comment</textarea>
+                  <input type="text" class="form-control" id="cardupdateTitle" value="cardName">
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              onclick="closeCardGetModal()">Close</button>
-            <button type="button" class="btn btn-primary" onclick="modalCardUpdate()">수정</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal" id="modalCardUpdate">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Card update</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-              onclick="closeCardupdateModal()"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <label for="cardupdateTitle" class="col-sm-2 col-form-label">제목</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="cardupdateTitle" value="cardName">
+              <div class="mb-3 row">
+                <label for="cardupateContent" class="col-sm-2 col-form-label">설명</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="cardupateContent" rows="3">content</textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cardupdateColor" class="col-sm-2 col-form-label">색상</label>
+                <!-- 색상 리스트자리 -->
+                <input type="color" class="form-control" id="cardupdateColor">
+              </div>
+              <div class="mb-3 row">
+                <label for="cardupdateDate" class="col-sm-2 col-form-label">마감일자</label>
+                <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
+                <!-- https://programmer93.tistory.com/5#google_vignette -->
+                <input type="date" class="form-control" id="cardupdateDate" value="2023-08-11">
               </div>
             </div>
-            <div class="mb-3 row">
-              <label for="cardupateContent" class="col-sm-2 col-form-label">설명</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" id="cardupateContent" rows="3">content</textarea>
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="cardupdateColor" class="col-sm-2 col-form-label">색상</label>
-              <!-- 색상 리스트자리 -->
-              <input type="color" class="form-control" id="cardupdateColor">
-            </div>
-            <div class="mb-3 row">
-              <label for="cardupdateDate" class="col-sm-2 col-form-label">마감일자</label>
-              <!-- 마감일자 자리 아래 사이트 참고하려고 함-->
-              <!-- https://programmer93.tistory.com/5#google_vignette -->
-              <input type="date" class="form-control" id="cardupdateDate" value="2023-08-11">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                onclick="closeCardupdateModal()">Close</button>
+              <button type="button" class="btn btn-primary" id="cardUpdateBtn">수정</button>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              onclick="closeCardupdateModal()">Close</button>
-            <button type="button" class="btn btn-primary" id="cardUpdateBtn">수정</button>
-          </div>
         </div>
       </div>
-    </div>
-    <div id="columnLists" class="d-flex flex-wrap justify-content-around columnBox">
-      <div draggable="true" class="column m-9">
-        <div>
-          <input type="text" class="form-control" id="columnName" value="columnName1">
-          <button id="mdfColumnBtn" type="button" class="btn btn-info">수정</button>
-          <button id="dltColumnBtn" type="button" class="btn btn-danger">삭제</button>
-        </div>
-        <div draggable="true" class="cardBox">
-          <div draggable="true" class="card" onclick="updateCard()">
-            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
+      <div id="columnLists" class="d-flex flex-wrap justify-content-around columnBox">
+        <div draggable="true" class="column m-9">
+          <div>
+            <input type="text" class="form-control" id="columnName" value="columnName1">
+            <button id="mdfColumnBtn" type="button" class="btn btn-info">수정</button>
+            <button id="dltColumnBtn" type="button" class="btn btn-danger">삭제</button>
           </div>
-        </div>
-        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
-      </div>
-      <div draggable="true" class="column m-9">
-        <div>
-          <input type="text" class="form-control" id="columnName" value="columnName2">
-          <button type="button" class="btn btn-info">수정</button>
-          <button type="button" class="btn btn-danger">삭제</button>
-        </div>
-        <div draggable="true" class="cardBox">
-        </div>
-        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
-      </div>
-      <div draggable="true" class="column m-9">
-        <div>
-          <input type="text" class="form-control" id="columnName" value="columnName3">
-          <button type="button" class="btn btn-info">수정</button>
-          <button type="button" class="btn btn-danger">삭제</button>
-        </div>
-        <div draggable="true" class="cardBox">
-          <div draggable="true" class="card" onclick="updateCard()">
-            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName2">
+          <div draggable="true" class="cardBox">
+            <div draggable="true" class="card" onclick="updateCard()">
+              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
+            </div>
           </div>
-          <div draggable="true" class="card" onclick="updateCard()">
-            <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName3">
-          </div>
+          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
         </div>
-        <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+        <div draggable="true" class="column m-9">
+          <div>
+            <input type="text" class="form-control" id="columnName" value="columnName2">
+            <button type="button" class="btn btn-info">수정</button>
+            <button type="button" class="btn btn-danger">삭제</button>
+          </div>
+          <div draggable="true" class="cardBox">
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+        </div>
+        <div draggable="true" class="column m-9">
+          <div>
+            <input type="text" class="form-control" id="columnName" value="columnName3">
+            <button type="button" class="btn btn-info">수정</button>
+            <button type="button" class="btn btn-danger">삭제</button>
+          </div>
+          <div draggable="true" class="cardBox">
+            <div draggable="true" class="card" onclick="updateCard()">
+              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName2">
+            </div>
+            <div draggable="true" class="card" onclick="updateCard()">
+              <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName3">
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
+        </div>
       </div>
-    </div>
 
-    <div>
-      <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
-    </div>
+      <div>
+        <button type="button" class="btn btn-secondary columnBtn" onclick="columnCreate()">column +</button>
+      </div>
   </main>
   <script>
     function userInfo() {
@@ -368,14 +394,13 @@
         $('#modalAdmin').hide();
       }
     }
+
+    //마이페이지로 이동
     function myPage() {
       window.location.replace('./myPage.html');
     }
 
-    function memberInvite() {
-      window.location.replace('./invitePage.html');
-    }
-
+    //컬럼 생성 모달 온/오프
     function columnCreate() {
       if ($('#modalColumnCreate').css('display') == 'none') {
         $('#modalColumnCreate').show();
@@ -388,6 +413,7 @@
       }
     }
 
+    //카드 생성 모달 온/오프
     function createCard() {
       if ($('#modalCardCreate').css('display') == 'none') {
         $('#modalCardCreate').show();
@@ -400,6 +426,7 @@
       }
     }
 
+    //카드 수정 모달 온/오프
     function updateCard() {
       if ($('#modalCardGet').css('display') == 'none') {
         $('#modalCardGet').show();
@@ -412,6 +439,7 @@
       }
     }
 
+    //댓글 작성란 버튼
     function commentBox() {
       if ($('#commentBox').css('display') == 'none') {
         $('#commentBox').show();
@@ -421,6 +449,7 @@
       }
     }
 
+    //카드 수정 버튼 클릭시 온/오프
     function modalCardUpdate() {
       if ($('#modalCardUpdate').css('display') == 'none') {
         $('#modalCardUpdate').show();
@@ -428,9 +457,29 @@
       }
     }
 
-    function closeCardupdateModal() {
+    function closeCardUpdateModal() {
       if ($('#modalCardUpdate').css('display') != 'none') {
         $('#modalCardUpdate').hide();
+      }
+    }
+
+    //참여한 멤버 확인 버튼 온/오프
+    function memberCheck() {
+      if ($('.cardMembers').css('display') == 'none') {
+        $('.cardMembers').show();
+      }
+      else if ($('.cardMembers').css('display') != 'none') {
+        $('.cardMembers').hide();
+      }
+    }
+
+    //보드에 참여한 멤버 확인
+    function memberBoardCheck() {
+      if ($('.members').css('display') == 'none') {
+        $('.members').show();
+      }
+      else if ($('.members').css('display') != 'none') {
+        $('.members').hide();
       }
     }
     //컬럼 드래그
@@ -550,37 +599,6 @@
       boardDesc.innerText = `${description}`
     }
 
-    // 컬럼 붙여넣기
-    // async function getColumns(boardId) {
-    //   try {
-    //     const response = await fetch(`/api/boards/${boardId}/columns`);
-    //     const data = await response.json();
-    //     const columns = data.columns;
-
-    //     const columnLists = document.getElementById('columnLists');
-    //     columnLists.innerHTML = '';
-
-    //     columns.forEach(column => {
-    //       columnLists.innerHTML += `
-    //     <div id="${column.columnId}" draggable="true" class="column m-9">
-    //       <div>
-    //         <input type="text" class="form-control" id="columnName" value="${column.name}">
-    //         <button id="modifyColumnBtn" type="button" class="btn btn-info">수정</button>
-    //         <button id="dltColumnBtn" type="button" class="btn btn-danger">삭제</button>
-    //       </div>
-    //       <div draggable="true" class="cardBox">
-    //         <div draggable="true" class="card" onclick="updateCard()">
-    //           <input type="text" readonly class="form-control-plaintext" id="cardName" value="cardName1">
-    //         </div>
-    //       </div>
-    //       <button type="button" class="btn btn-secondary" onclick="createCard()">card +</button>
-    //     </div>`;
-    //     });
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-
     async function getColumns(boardId) {
       try {
         const response = await fetch(`/api/boards/${boardId}/columns`);
@@ -590,7 +608,6 @@
 
         const columnLists = document.getElementById('columnLists');
         columnLists.innerHTML = '';
-        // console.log(columns[1].columnId)
 
         for (const column of columns) {
           const cards = await getCardsByColumnId(column.columnId);

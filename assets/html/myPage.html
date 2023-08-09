@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,82 +21,261 @@
       @import url('https://fonts.googleapis.com/css2?family=Jua&family=Poor+Story&display=swap');
     </style>
     <link href="../css/myPage.css" rel="stylesheet" />
-</head>
-<body>
-  <header>
-    <div class="mytitle">
-      <div>
-        <h3 class="titleName">6사시미</h3>
+  </head>
+  <body>
+    <header>
+      <div class="mytitle">
+        <div>
+          <h3 class="titleName">6사시미</h3>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
     <main>
+      <!-- 비밀번호 변경 모달 -->
       <div class="modal" id="modal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">비밀번호 변경</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onclick="closeModal()"
+              ></button>
             </div>
             <div class="modal-body">
               <div class="mb-3 row">
-                <label for="inputChanePwd" class="col-sm-2 col-form-label">Password</label>
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputChanePwd">
+                  <input type="password" class="form-control" id="inputPassword" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="inputChaneConfirmPwd" class="col-sm-2 col-form-label">Confirm</label>
+                <label for="inputChangePwd" class="col-sm-2 col-form-label">ChangePwd</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputChaneConfirmPwd">
+                  <input type="password" class="form-control" id="inputChangePwd" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="inputChangeConfirmPwd" class="col-sm-2 col-form-label">Confirm</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputChangeConfirmPwd" />
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="changePwdBtn">Save changes</button>
             </div>
           </div>
         </div>
       </div>
-        <div style="width: 500px; margin: 100px auto auto auto;">
-            <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                </div>
-              </div>
-                <div class="mb-3 row">
-                    <label for="nickname" class="col-sm-2 col-form-label">nickname</label>
-                    <div class="col-sm-10">
-                      <input type="nickname" class="form-control" id="nickname">
-                    </div>
-                  </div>
-              <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword">
-                </div>
-              </div>
-            <div class="buttonGroup" style="padding-left: 25%;">
-                <button type="button" class="btn btn-info" onclick="passwordChangeBtn()">비밀번호 수정</button>
-                <button type="button" class="btn btn-primary">수정</button>
-                <button type="button" class="btn btn-secondary">회원 탈퇴</button>
+      <!-- 회원탈퇴 모달 -->
+      <div class="modal" id="signoutModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">회원탈퇴</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onclick="closeSignoutModal()"
+              ></button>
             </div>
-        </div>                   
+            <div class="modal-body">
+              <div class="mb-3 row">
+                <label for="signoutInputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="signoutInputPassword" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeSignoutModal()">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="signoutBtn">signout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 마이페이지 -->
+      <div style="width: 500px; margin: 100px auto auto auto">
+        <div class="mb-3 row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="nickname" class="col-sm-2 col-form-label">nickname</label>
+          <div class="col-sm-10">
+            <input type="nickname" class="form-control" id="nickname" />
+          </div>
+        </div>
+        <div class="buttonGroup" style="padding-left: 25%">
+          <button type="button" class="btn btn-info" onclick="passwordChangeBtn()">비밀번호 수정</button>
+          <button type="button" class="btn btn-primary" id="updateInfoBtn">수정</button>
+          <button type="button" class="btn btn-danger" onclick="signoutBtn()">회원 탈퇴</button>
+        </div>
+      </div>
     </main>
     <script>
-      function passwordChangeBtn(){
-        if($('#modal').css('display') == 'none'){
+      // 회원정보 가져와서 표시
+      addEventListener('DOMContentLoaded', async function getInfo() {
+        try {
+          const response = await fetch('/api/profile', {
+            method: 'GET',
+          });
+          const { data } = await response.json();
+
+          document.getElementById('staticEmail').value = data.email;
+          document.getElementById('nickname').value = data.nickname;
+
+          if (response.ok) {
+            console.log(data.message);
+          } else {
+            console.log(data.message);
+          }
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      });
+
+      // 비밀번호 수정
+      document.getElementById('changePwdBtn').addEventListener('click', async function updatePwd() {
+        const inputPassword = document.getElementById('inputPassword').value;
+        const inputChangePwd = document.getElementById('inputChangePwd').value;
+        const inputChangeConfirmPwd = document.getElementById('inputChangeConfirmPwd').value;
+
+        if (!inputPassword || !inputChangePwd || !inputChangeConfirmPwd) {
+          alert('비밀번호를 입력해주세요.');
+          return;
+        }
+
+        try {
+          const response = await fetch('/api/profile/password', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              password: inputPassword,
+              changePassword: inputChangePwd,
+              confirmPassword: inputChangeConfirmPwd,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            console.log(data.message);
+            alert('비밀번호가 수정되었습니다.');
+            location.reload();
+          } else {
+            alert(data.message);
+          }
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      });
+
+      // 닉네임 수정
+      document.getElementById('updateInfoBtn').addEventListener('click', async function updateInfo() {
+        const nickname = document.getElementById('nickname').value;
+
+        if (!nickname) {
+          alert('닉네임을 입력해주세요.');
+          location.reload();
+        }
+
+        try {
+          const response = await fetch('/api/profile', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              nickname,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            console.log(data.message);
+            alert('닉네임이 수정되었습니다.');
+            location.reload();
+          } else {
+            console.log(data.message);
+          }
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      });
+
+      // 회원 탈퇴
+      document.getElementById('signoutBtn').addEventListener('click', async function signout() {
+        const signoutInputPassword = document.getElementById('signoutInputPassword').value;
+        if (!signoutInputPassword) {
+          alert('비밀번호를 입력해주세요.');
+          return;
+        }
+
+        const isSignout = confirm('회원 탈퇴를 진행하시겠습니까?');
+
+        if (isSignout) {
+          try {
+            const response = await fetch('/api/profile', {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                password: signoutInputPassword,
+              }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+              console.log(data.message);
+              alert('회원탈퇴가 완료되었습니다.');
+              window.location.replace('/');
+            } else {
+              alert(data.message);
+            }
+          } catch (err) {
+            console.error('Error:', err);
+          }
+        }
+      });
+
+      //비밀번호 변경 모달 온/오프
+      function passwordChangeBtn() {
+        if ($('#modal').css('display') == 'none') {
           $('#modal').show();
         }
       }
 
-      function closeModal(){
-        if($('#modal').css('display') != 'none'){
+      function closeModal() {
+        if ($('#modal').css('display') != 'none') {
           $('#modal').hide();
         }
       }
+
+      //회원 탈퇴 모달 온/오프
+      function signoutBtn() {
+        if ($('#signoutModal').css('display') == 'none') {
+          $('#signoutModal').show();
+        }
+      }
+
+      function closeSignoutModal() {
+        if ($('#signoutModal').css('display') != 'none') {
+          $('#signoutModal').hide();
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
