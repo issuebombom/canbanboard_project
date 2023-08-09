@@ -83,3 +83,11 @@ header>div>label {
 .column>button {
     margin: auto auto auto 25%;
 }
+
+.members {
+    display: none;
+}
+
+.cardMembers {
+    display: none;
+}

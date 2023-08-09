@@ -26,6 +26,15 @@ class UserBoardService {
     const invitedBoard = await UserBoard.create({ userId: user.userId, boardId });
     return invitedBoard;
   };
+
+  getJoinUser = async (boardId) => {
+    let users = await UserBoard.findAll({ where: { boardId }, attributes: [], include: [{ model: User }] });
+    if (!users) {
+      throw new CustomError(404, '참여자가 없습니다.');
+    }
+    users = users.map((user) => user.User);
+    return users;
+  };
 }
 
 module.exports = UserBoardService;

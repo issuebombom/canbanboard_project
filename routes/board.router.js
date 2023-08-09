@@ -24,4 +24,7 @@ router.delete('/boards/:boardId', isLoggedIn, boardController.deleteBoard);
 // 보드 초대
 router.post('/boards/:boardId/invite', isLoggedIn, boardController.inviteBoard);
 
+//보드 참여자 조회
+router.get('/boards/:boardId/users', isLoggedIn, boardController.getJoinUser);
+
 module.exports = router;
