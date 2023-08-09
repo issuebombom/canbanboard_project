@@ -18,7 +18,7 @@ class AuthController {
       return res.send({ message: '회원가입 완료' });
     } catch (err) {
       console.error(err.stack);
-      return res.status(err.status).send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 
@@ -50,7 +50,7 @@ class AuthController {
       })(req, res, next); //! 미들웨어 내의 미들웨어에는 콜백을 실행시키기위해 (req, res, next)를 붙인다.
     } catch (err) {
       console.error(err.stack);
-      return res.send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 
@@ -66,7 +66,7 @@ class AuthController {
       res.send({ message: '로그아웃 완료' });
     } catch (err) {
       console.error(err.stack);
-      return res.send({ message: `${err.message}` });
+      return res.status(err.status || 500).send({ message: `${err.message}` });
     }
   };
 }
