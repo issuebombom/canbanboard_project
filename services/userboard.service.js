@@ -24,7 +24,7 @@ class UserBoardService {
       throw new CustomError(404, '초대하신 유저가 존재하지않습니다.');
     } 
     if (ivtuser) {
-      throw new CustomError(403, '이미 초대된 유저입니다.')
+      throw new CustomError(403, '이미 초대한 유저입니다.')
     }
     
 

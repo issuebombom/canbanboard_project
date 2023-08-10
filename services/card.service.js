@@ -87,12 +87,12 @@ class CardService {
 
   inviteUser = async (cardId, email) => {
     const user = await User.findOne({ where: { email } });
-    const ivtuser = await this.userCardService.getJoinCard(user.userId);
+    const ivtuser = await UserCard.findOne({where:{cardId, userId:user.userId}});
     if (!user) {
       throw new CustomError(404, '유저가 존재하지 않습니다.');
     }
     if (ivtuser) {
-      throw new CustomError(403, '이미 초대된 유저입니다.');
+      throw new CustomError(403, '이미 초대한 유저입니다.');
     }
 
     // userCard 생성
