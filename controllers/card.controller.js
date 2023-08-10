@@ -113,6 +113,19 @@ class CardController {
       return res.status(error.status || 500).send({ message: error.message });
     }
   };
+
+  // 카드 순서 수정
+  updateCardOrder = async (req, res) => {
+    const { columnId, cardId } = req.params;
+    const { order } = req.body;
+    try {
+      const { status, message } = await this.cardService.updateCardOrder(columnId, cardId, order);
+      res.status(status).send({ message });
+    } catch (error) {
+      console.error(error.stack);
+      return res.status(error.status || 500).send({ message: error.message });
+    }
+  };
 }
 
 module.exports = CardController;

@@ -22,7 +22,7 @@
   <header>
     <div class="mytitle">
       <div>
-        <h3 class="titleName">6사시미</h3>
+        <h3 class="titleName"><a href="/main" style="text-decoration: none; color: inherit">6사시미</a></h3>
       </div>
     </div>
     <div class="listBtn">
@@ -83,7 +83,7 @@
   <script>
     // 마이페이지로 이동
     function myPage() {
-      window.location.replace('./myPage.html');
+      window.location.replace('/mypage');
     }
 
     //모달 온/오프
@@ -133,7 +133,7 @@
 
     //생성된 보드 선택시 해당 보드페이지로 이동
     function boardDetailPage(boardId) {
-      window.location.replace(`./boardPage.html?boardId=${boardId}`);
+      window.location.replace(`/main/board?boardId=${boardId}`);
     }
 
     //* 초기 세팅
@@ -156,7 +156,6 @@
 
     async function getBoards(callback) {
       try {
-        // console.log(123123)
         const response = await fetch('/api/boards');
         const data = await response.json();
         if (response.ok) {
@@ -164,7 +163,7 @@
         } else {
           alert(data.message);
           // 로그인 필요 시 로그인 페이지로 이동
-          window.location.href = '/';
+          window.location.href = '/login';
         }
       } catch (err) {
         console.error('Error:', err);
@@ -179,7 +178,7 @@
         const data = await response.json();
         if (response.ok) {
           alert(data.message);
-          window.location.href = '/';
+          window.location.href = '/login';
         }
       } catch (err) {
         console.error('Error:', err);

@@ -14,5 +14,7 @@ router.get('/boards/:boardId/columns', isLoggedIn, columnController.getAllColumn
 router.put('/boards/:boardId/columns/:columnId', isLoggedIn, columnController.updateColumn);
 /** 컬럼 삭제 */
 router.delete('/boards/:boardId/columns/:columnId', isLoggedIn, columnController.deleteColumn);
+/** 컬럼 순서 수정 */
+router.put('/boards/:boardId/columns/:columnId/order', isLoggedIn, columnController.updateColumnOrder);
 
 module.exports = router;

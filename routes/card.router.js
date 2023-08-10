@@ -26,4 +26,8 @@ router.get('/columns/:columnId/cards/:cardId', isLoggedIn, cardController.getDet
 
 //카드 참여하는 멤버 조회
 router.get('/cards/:cardId/users', isLoggedIn, cardController.getJoinUser);
+
+// 카드 순서 수정
+router.put('/columns/:columnId/cards/:cardId/order', isLoggedIn, cardController.updateCardOrder);
+
 module.exports = router;

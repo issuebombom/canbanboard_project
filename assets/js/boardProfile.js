@@ -43,7 +43,7 @@ const profileGet = async () => {
 // 프로필 출력 - 보드에 있는 유저 정보 API
 //없어서 생성함
 const boardProfileGet = async () => {
-  const api = await fetch(`/api/boards/1/users`, {
+  const api = await fetch(`/api/boards/${boardId}/users`, {
     method: 'GET',
   });
   const { status } = await api;
@@ -57,7 +57,7 @@ const boardProfileGet = async () => {
 
 //보드 정보 출력 - 해당 보드 정보내에있는 admin 필요
 const boardAdminGet = async () => {
-  const api = await fetch(`/api/boards/1`, {
+  const api = await fetch(`/api/boards/${boardId}`, {
     method: 'GET',
   });
   const { status } = await api;

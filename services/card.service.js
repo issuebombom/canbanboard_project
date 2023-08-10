@@ -1,7 +1,6 @@
 const { User, Card, UserCard, Column } = require('../models');
 const CustomError = require('../error');
 const UserCardService = require('../services/usercard.service');
-const dayjs = require('dayjs');
 
 class CardService {
   userCardService = new UserCardService();
@@ -42,7 +41,7 @@ class CardService {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     }
 
-    const cards = await Card.findAll({ where: { columnId } });
+    const cards = await Card.findAll({ where: { columnId },  order: [['order', 'ASC']] });
     return { status: 201, message: '카드 조회에 성공하였습니다.', cards };
   };
 
@@ -56,8 +55,6 @@ class CardService {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     } else if (!card) {
       throw new CustomError(404, '카드가 존재하지 않습니다.');
-    } else if (card.cardId !== cards[0].cardId) {
-      throw new CustomError(403, '카드 수정 권한이 존재하지 않습니다.');
     }
 
     // 수정할 데이터가 존재 하면 수정 후 저장
@@ -81,8 +78,6 @@ class CardService {
       throw new CustomError(404, '컬럼이 존재하지 않습니다.');
     } else if (!card) {
       throw new CustomError(404, '카드가 존재하지 않습니다.');
-    } else if (card.cardId !== cards[0].cardId) {
-      throw new CustomError(403, '카드 수정 권한이 존재하지 않습니다.');
     }
 
     await Card.destroy({ where: { cardId } });
@@ -92,9 +87,12 @@ class CardService {
 
   inviteUser = async (cardId, email) => {
     const user = await User.findOne({ where: { email } });
-
+    const ivtuser = await this.userCardService.getJoinCard(user.userId);
     if (!user) {
       throw new CustomError(404, '유저가 존재하지 않습니다.');
+    }
+    if (ivtuser) {
+      throw new CustomError(403, '이미 초대된 유저입니다.');
     }
 
     // userCard 생성
@@ -106,6 +104,19 @@ class CardService {
     const findOneCard = await Card.findOne({ where: { cardId } });
 
     return { status: 200, message: '', data: findOneCard };
+  };
+
+  // 카드 순서 수정
+  updateCardOrder = async (columnId, cardId, order) => {
+    const column = await Column.findByPk(columnId);
+    const card = await Card.findByPk(cardId);
+    if (!column) {
+      throw new CustomError(404, '컬럼이 존재하지 않습니다.');
+    } else if (!card) {
+      throw new CustomError(404, '카드가 존재하지 않습니다.');
+    }
+    await Card.update({ order }, { where: { columnId, cardId } });
+    return { status: 200, message: '카드를 순서를 수정하였습니다.' };
   };
 }
 

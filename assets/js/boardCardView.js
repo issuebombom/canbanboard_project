@@ -1,20 +1,20 @@
 //카드 상세 보기 - API
 //존재하지 않아서 백엔드 생성
-const cardGet = async () => {
-  const api = await fetch(`/api/columns/1/cards/1`, {
+const cardGet = async (columnId,cardId) => {
+  const api = await fetch(`/api/columns/${columnId}/cards/${cardId}`, {
     method: 'GET',
   });
   const { status } = await api;
   const { message, data } = await api.json();
   if (status == 200) {
-    getCardMembers(1); //cardId
+    getCardMembers(cardId); //cardId
     cardDetailHtml(data);
-    createEmailList(2); //boardId
-    memberAddBtn(1, 1); //columnId, cardId
+    createEmailList(boardId); //boardId
+    memberAddBtn(columnId,cardId); //columnId, cardId
     userInfoGet();
     // commentPost(1); //cardId
     // commentGet(1); //cardId
-    deleteCard(1, 1); //columnId, cardId
+    deleteCard(columnId,cardId); //columnId, cardId
   } else {
     alert(message);
   }
@@ -36,7 +36,7 @@ const cardDetailHtml = (data) => {
 //카드에 참여한 멤버 확인 - API
 //카드 id값으로 유저id값 get. 없어서 생성함
 const getCardMembers = async (cardId) => {
-  const api = await fetch(`/api/cards/1/users`, {
+  const api = await fetch(`/api/cards/${cardId}/users`, {
     method: 'GET',
   });
   const { status } = await api;
@@ -61,7 +61,7 @@ const getHtmlCardMembers = (data) => {
 
 //멤버 초대 - 리스트부터 작성.
 const createEmailList = async (boardId) => {
-  const api = await fetch(`/api/boards/2/users`, {
+  const api = await fetch(`/api/boards/${boardId}/users`, {
     method: 'GET',
   });
   const { status } = await api;
@@ -85,7 +85,7 @@ const listHtml = (data) => {
 const memberAddBtn = (columnId, cardId) => {
   document.getElementById('memberAddBtn').addEventListener('click', async function () {
     const email = document.getElementById('search_type').value;
-    const api = await fetch(`/api/columns/1/cards/1`, {
+    const api = await fetch(`/api/columns/${columnId}/cards/${cardId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email }),
@@ -96,7 +96,7 @@ const memberAddBtn = (columnId, cardId) => {
 
     if (status == 200) {
       alert(message);
-      window.location.replace(`./boardPage.html?boardId=2`);
+      window.location.replace(`./boardPage.html?boardId=${boardId}`);
     } else {
       alert(message);
     }
@@ -130,7 +130,7 @@ const commentPostHtml = (data) => {
 const commentPost = (cardId) => {
   document.getElementById('commentSumbit').addEventListener('click', async function () {
     const content = document.getElementById('cardComment').value;
-    const api = await fetch(`/api/cards/1/comment`, {
+    const api = await fetch(`/api/cards/${cardId}/comment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content: content }),
@@ -140,7 +140,7 @@ const commentPost = (cardId) => {
     console.log(status, message);
     if (status == 200) {
       alert(message);
-      window.location.replace(`./boardPage.html?boardId=2`);
+      window.location.replace(`./boardPage.html?boardId=${boardId}`);
     } else {
       alert(message);
     }
@@ -149,7 +149,7 @@ const commentPost = (cardId) => {
 
 //댓글 출력 api - error
 const commentGet = async (cardId) => {
-  const api = await fetch(`/api/cards/1/comment`, {
+  const api = await fetch(`/api/cards/${cardId}/comment`, {
     method: 'GET',
   });
 
@@ -179,13 +179,13 @@ const getCommentHtml = (data) => {
 const deleteCard = (columnId, cardId) => {
   //삭제 버튼 클릭시
   document.getElementById('deleteCardBtn').addEventListener('click', async function () {
-    const api = await fetch(`/api/columns/1/cards/1`, {
+    const api = await fetch(`/api/columns/${columnId}/cards/${cardId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
     const { status } = await api;
     if (status == 200) {
-      window.location.replace(`./boardPage.html?boardId=2`);
+      window.location.replace(`./boardPage.html?boardId=${boardId}`);
     }
   });
 };

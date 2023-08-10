@@ -31,9 +31,9 @@ class ColumnController {
 
   updateColumn = async (req, res) => {
     const { boardId, columnId } = req.params;
-    const { name, order } = req.body;
+    const { name } = req.body;
     try {
-      const { status, message, result } = await this.columnService.updateColumn(boardId, columnId, order, name);
+      const { status, message, result } = await this.columnService.updateColumn(boardId, columnId, name);
       return res.status(status).json({ message: message });
     } catch (error) {
       if (error) return res.status(error.status || 500).json({ message: error.message });
@@ -49,6 +49,18 @@ class ColumnController {
     } catch (error) {
       if (error) return res.status(error.status || 500).json({ message: error.message });
       return res.status(500).json({ message: '컬럼 삭제에 실패하였습니다.' });
+    }
+  };
+
+  updateColumnOrder = async (req, res) => {
+    const { boardId, columnId } = req.params;
+    const { order } = req.body;
+    try {
+      const { status, message, result } = await this.columnService.updateColumnOrder(boardId, columnId, order);
+      return res.status(status).json({ message: message });
+    } catch (error) {
+      if (error) return res.status(error.status || 500).json({ message: error.message });
+      return res.status(500).json({ message: '컬럼 순서 수정에 실패하였습니다.' });
     }
   };
 }

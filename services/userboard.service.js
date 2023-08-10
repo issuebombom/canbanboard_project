@@ -18,10 +18,15 @@ class UserBoardService {
 
   inviteBoard = async (email, boardId) => {
     const user = await User.findOne({ where: { email } });
+    const ivtuser = await UserBoard.findOne({where: {boardId, userId: user.userId}})
     console.log(user);
     if (!user) {
       throw new CustomError(404, '초대하신 유저가 존재하지않습니다.');
+    } 
+    if (ivtuser) {
+      throw new CustomError(403, '이미 초대된 유저입니다.')
     }
+    
 
     const invitedBoard = await UserBoard.create({ userId: user.userId, boardId });
     return invitedBoard;
